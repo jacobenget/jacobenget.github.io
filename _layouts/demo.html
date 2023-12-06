@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div id="demoDetailWrapper" class="gainLayout">
+  <div class="navigationBar" id="demoTopBar">
+    {% if page.previous %}
+    <span class="previousLink"><a class="boldMe dontUnderlineMe" href={{ page.previous.url }}>&lt; previous</a></span>
+    {% endif %}
+    <span class="demosHomeLink"><a class="boldMe dontUnderlineMe" href="/demos">demos home</a></span>
+    {% if page.next %}
+    <span class="nextLink"><a class="boldMe dontUnderlineMe" href={{ page.next.url }}>next &gt;</a></span>
+    {% endif %}
+  </div>
+  <div id="demoTitleBar">
+    <img alt="" id="headerThumbnail" src="/assets/images/demos/{{ page.demo_id }}/thumbnail.jpg"/>
+    <span id="entireDemoTitle"><span class="demoTitle">{{ page.title }}</span><span class="demoDescription">{{ page.description }}</span></span>
+  </div>
+  <div id="demoIncludeContents">
+    {{ content }}
+  </div>
+  <div class="navigationBar" id="demoBottomBar">
+    {% if page.previous %}
+    <span class="previousLink"><a class="boldMe dontUnderlineMe" href={{ page.previous.url }}>&lt; previous</a></span>
+    {% endif %}
+    <span class="demosHomeLink"><a class="boldMe dontUnderlineMe" href="/demos">demos home</a></span>
+    {% if page.next %}
+    <span class="nextLink"><a class="boldMe dontUnderlineMe" href={{ page.next.url }}>next &gt;</a></span>
+    {% endif %}
+  </div>
+</div>

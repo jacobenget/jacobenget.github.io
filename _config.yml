@@ -1,1 +1,6 @@
-name: My Jekyll Website
+title: Jacob Enget's Personal Website
+collections:
+  demos:
+    output: true
+plugins:
+  - jekyll-redirect-from
