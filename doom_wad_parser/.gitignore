@@ -1,0 +1,14 @@
+# An ignore file for a Scala/sbt project, copied as-is from here: https://github.com/github/gitignore/blob/4488915eec0b3a45b5c63ead28f286819c0917de/Global/SBT.gitignore
+
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+.history
+.cache
+.lib/
+.bloop/
+metals.sbt
+.bsp/
