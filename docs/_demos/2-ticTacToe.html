@@ -1,0 +1,64 @@
+---
+title: Tic Tac Toe
+description: a classic game of strategy
+demo_id: ticTacToe
+layout: demo
+associated_top_level_page: demos
+---
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+<link rel="stylesheet" media="screen" href="/assets/css/demos/ticTacToe.css">
+
+This page allows you to play Tic-tac-toe.  X's always start. 
+
+<div id="ticTacToeGame">
+    <div class="leftPane">
+        <div class="status"></div>
+        <div class="playerTypeSelect"><span class="tictactoe-markForPlayerX">X</span>'s played by <select class="playerXSelect"></select></div>
+        <div class="playerTypeSelect"><span class="tictactoe-markForPlayerO">O</span>'s played by <select class="playerOSelect"></select></div>
+        <div><button class="newGame" type="button">Restart Game</button></div>
+    </div>
+    <div class="rightPane">
+        <table class="board">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td class="middleColumn"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="middleRow"></td>
+                    <td class="middleRow middleColumn"></td>
+                    <td class="middleRow"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="middleColumn"></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="module">
+    import { Main, GameUIElements } from "/assets/js/demos/ticTacToe/main.js";
+
+    $(document).ready(function() {
+        var game = document.getElementById("ticTacToeGame")
+        var board = game.querySelector("table.board");
+        var newGameButton = game.querySelector("button.newGame");
+        var playerXSelect = game.querySelector("select.playerXSelect");
+        var playerOSelect = game.querySelector("select.playerOSelect");
+        var gameStatus = game.querySelector("div.status");
+
+        var gameElements = new GameUIElements(
+            board,
+            playerXSelect,
+            playerOSelect,
+            newGameButton,
+            gameStatus
+        );
+        Main.initializeTicTacToeGame(gameElements);
+    });
+</script>

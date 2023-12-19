@@ -1,0 +1,92 @@
+---
+---
+
+$color-for-player-x: #a34a40;
+$color-for-player-o: #0e3366;
+$player-x-lighten-factor: 45%;
+$player-o-lighten-factor: 70%;
+
+div#ticTacToeGame {
+  overflow: auto;
+  padding: 20px 20px 20px 20px;
+}
+
+div#ticTacToeGame .leftPane {
+  float: left;
+  width: 300px;
+  padding-top: 60px;
+}
+
+div#ticTacToeGame .leftPane div {
+  display: flex;
+  justify-content: center;
+  white-space:pre;
+}
+
+.leftPane .status {
+  font-size: 20px;
+  padding-bottom: 60px;
+}
+
+.leftPane .playerTypeSelect {
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+.leftPane button {
+  width: 80%;
+  margin-top: 64px;
+}
+
+div#ticTacToeGame .rightPane {
+  float: right;
+}
+
+td {
+  width: 100px;
+  height: 100px;
+}
+
+table.board {
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+table.board td.middleColumn {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+table.board td.middleRow {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+table.board td {
+  text-align: center;
+  font-size: 50px;
+}
+
+.tictactoe-markForPlayerX {
+  color: $color-for-player-x;
+}
+
+.tictactoe-markForPlayerO {
+  color: $color-for-player-o;
+}
+
+table.board td.tictactoe-openForPlayerX:hover {
+  background-color: lighten($color-for-player-x, $player-x-lighten-factor);
+}
+
+table.board td.tictactoe-openForPlayerO:hover {
+  background-color: lighten($color-for-player-o, $player-o-lighten-factor);
+}
+
+table.board td.tictactoe-contributedToWinOfPlayerX {
+  background-color: lighten($color-for-player-x, $player-x-lighten-factor);
+}
+
+table.board td.tictactoe-contributedToWinOfPlayerO {
+  background-color: lighten($color-for-player-o, $player-o-lighten-factor);
+}
