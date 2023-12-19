@@ -1,6 +1,6 @@
 ---
-title: Tic Tac Toe
-description: a classic game of strategy
+title: Tic-Tac-Toe
+description: a classic game of simple strategy
 demo_id: ticTacToe
 layout: demo
 associated_top_level_page: demos
@@ -9,7 +9,34 @@ associated_top_level_page: demos
 <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
 <link rel="stylesheet" media="screen" href="/assets/css/demos/ticTacToe.css">
 
-This page allows you to play Tic-tac-toe.  X's always start. 
+This page allows you to play the game tic-tac-toe, against either an AI opponent or a human opponent that is sitting next to you. To simplify things, X's always go first in the game. 
+<br/>
+<br/>
+I mainly<sup>*</sup> built this because I wanted to test out how well a very generic AI algorithm would work on a game like tic-tac-toe, which has a reasonably small set of possible states
+(around 6000, assuming that you're oblivious to rotations and symmetries of the game board, which my AI is).
+<br/>
+<br/>
+My idea was to implement an AI algorithm that was completely blind to the mechanics of the game it was playing, in this case tic-tac-toe.
+All I wanted the AI to know during its turn was (1) what distinct actions it could take, and (2) what the result would be when it took those actions.
+I wanted it to know nothing concrete about the actions it could take, and when the AI took an action it would learn nothing more than "game ends (with a win, loss, or draw)"
+or "opponents turn, and they have these actions available to them".
+<br/>
+<br/>
+Also, the AI would assume a simple model of it opponent's behavior.  It would assume that its opponent would seek an immediate win if that was possible, otherwise the opponent would act randomly.
+<br/>
+<br/>
+With this perspective the AI algorithm can, on its turn, simulate all possible further states of the game and calculate its remaining chances of winning at each state.
+Armed with that information the AI then chooses, for its turn, the action that maximizes its remaining chances of winning.  And that's it!
+<br/>
+<br/>
+Feel free to play against this AI below to see what you think.  It's definitely not perfect (e.g. it doesn't see a difference between a 'loss' and a 'draw',
+they're both just 'not winning' to it, so it'll sometimes make surprising choices) but I think it demonstrates that with a large working memory and great
+processing speed some simplish logic can manifest itself as "intelligence."
+<br/>
+<br/>
+Also, you can browse the source code for this game <a href="https://github.com/jacobenget/jacobenget.github.io/tree/main/tic_tac_toe">here</a>.
+Specifically, you can see the implementation of the AI algorithm described above in the file <a href="https://github.com/jacobenget/jacobenget.github.io/blob/main/tic_tac_toe/src/main/scala/GameAI.scala">GameAI.scala</a>.
+
 
 <div id="ticTacToeGame">
     <div class="leftPane">
@@ -40,6 +67,8 @@ This page allows you to play Tic-tac-toe.  X's always start.
         </table>
     </div>
 </div>
+
+<sup>*</sup> - I also built this as part of an application to the <a href="https://www.recurse.com/">Recurse Center</a> in fall 2023!
 
 <script type="module">
     import { Main, GameUIElements } from "/assets/js/demos/ticTacToe/main.js";

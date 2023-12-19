@@ -90,3 +90,8 @@ table.board td.tictactoe-contributedToWinOfPlayerX {
 table.board td.tictactoe-contributedToWinOfPlayerO {
   background-color: lighten($color-for-player-o, $player-o-lighten-factor);
 }
+
+/* The footnote on this page necessitates a bit more spacing before the footer*/
+#demoIncludeContents {
+  padding-bottom: 20px;
+}
