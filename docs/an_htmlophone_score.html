@@ -1,0 +1,177 @@
+<html>
+  <head>
+    <!--
+      This is an HTML page designed specifically to be consumed by the Chrome Extension HTMLophone
+        https://github.com/hannahilea/htmlophone-chrome-extension
+
+      in order to produce a specific set of notes when consumed!
+    -->
+
+    <style >
+      /* De-style all the unique inline text tags we're going to use as notes */
+      mark {
+        background-color: inherit;
+        color: inherit;
+      }
+      strong {
+        font-weight: inherit;
+      }
+      em {
+        font-style: inherit;
+      }
+      b {
+        font-weight: inherit;
+      }
+      kbd {
+        font-family: inherit;
+      }
+      i {
+        font-style: inherit;
+      }
+      var {
+        font-style: inherit;
+      }
+      u {
+        text-decoration: inherit;
+      }
+      q::before {
+        content: inherit;
+      }
+      q::after {
+        content: inherit;
+      }
+      nav {
+        display: inline;
+      }
+
+      /* Style the header part of the page, which mentions the library title*/
+      .header {
+        padding-top: 10px;
+        font-size: x-large;
+      }
+      .libraryTitle {
+        font-size:48px;
+        text-decoration: inherit;
+        font-family: cursive;
+      }
+      .libraryPic {
+        width: 96px;
+        height: 96px;
+      }
+      .disclaimer {
+        font-size: x-small;
+      }
+      .countdown {
+        font-size: small;
+        padding-top: 10px;
+        padding-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- "Notes" listed in pitch order
+    <var class="C3">C3</var>
+    <b class="D3">D3</b>
+    <em class="E3">E3</em>
+    <mark class="G3">G3</mark>
+    <i class="A3">A3</i>
+    <kbd class="C4">C4</kbd>
+    <strong class="D4">D4</strong>
+    <span class="E4">E4</span>
+    <q class="G4">G4</q>
+    <u class="A4">A4</u>
+    -->
+
+    <!-- "Notes" listed in the order they appear in the prelude part of the HTML page, which programs the tags as we'd like
+          (while also producing a nice even number of 16 beats)
+    beat 1 <body> - (register note 1)
+    beat 2 <b class="D3">D3</b> - register note 2
+    beat 3 <a> - (register note 3)
+    beat 4 <img> - (register note 4)
+    beat 5 <i class="A3">A3</i> - register note 5
+    beat 6 <kbd class="C4">C4</kbd> - register note 6
+    beat 7 <strong class="D4">D4</strong> - register note 7
+    beat 8 <span class="E4">E4</span> - register note 8
+
+    beat 9 <q class="G4">G4</q> - register note 9
+    beat 10 <u class="A4">A4</u> - register note 10
+    beat 11 <var class="C3">C3</var> - register note 1
+    beat 12 SOMETHING NEW, to consume note 2 - register note 2
+    beat 13 <em class="E3">E3</em> - register note 3
+    beat 14 SOMETHING REPEATED
+    beat 15 <mark class="G3">G3</mark> - register note 4
+    beat 16 SOMETHING REPEATED
+    -->
+
+
+    <b class="D3 header" style="display:block">A piece written for
+    <a class="libraryTitle" href="https://github.com/hannahilea/htmlophone-chrome-extension"> HTMLophone
+      <img class="libraryPic" src="https://raw.githubusercontent.com/hannahilea/htmlophone-chrome-extension/main/images/icon-128.png">
+    </a>
+    <i class="A3"><kbd class="C4"><strong class="D4 disclaimer">(as it existed on May 9, 2024)</span></strong></kbd></i>
+    </b>
+
+    <span class="E4 countdown" style="display:block">
+    <q class="G4"><u class="A4">One, </u></q>
+    <var class="C3"><nav>Two, </nav></var>
+    <em class="E3"><em class="E3">Ready, </em></em>
+    <mark class="G3"><mark class="G3">Go!</mark></mark>
+    </span>
+
+    <!-- SONG STARTS HERE -->
+
+    <kbd class="C4" style="display:block">Old
+    <kbd class="C4"><kbd class="C4"><mark class="G3">McDonald</mark></kbd></kbd>
+    <i class="A3">had</i>
+    <i class="A3">a</i>
+    <mark class="G3"><mark class="G3">webpage,</mark></mark>
+    <span class="E4">E</span>
+    <span class="E4">I</span>
+    <strong class="D4">E</strong>
+    <strong class="D4">I</strong>
+    <kbd class="C4"><kbd class="C4"><kbd class="C4">O</kbd></kbd></kbd></kbd>
+
+    <mark class="G3" style="display:block">And
+    <kbd class="C4">on</kbd>
+    <kbd class="C4">that</kbd>
+    <kbd class="C4">webpage</kbd>
+    <mark class="G3">he</mark>
+    <i class="A3">had</i>
+    <i class="A3">some</i>
+    <mark class="G3"><mark class="G3">markup,</mark></mark>
+    <span class="E4">E</span>
+    <span class="E4">I</span>
+    <strong class="D4">E</strong>
+    <strong class="D4">I</strong>
+    <kbd class="C4"><kbd class="C4"><kbd class="C4">O</kbd></kbd></kbd></mark>
+
+    <mark class="G3" style="display:block">With a
+    <kbd class="C4">&lt;nav&gt;</kbd>
+    <kbd class="C4">&lt;nav&gt;</kbd>
+    <kbd class="C4">here,</kbd>
+    <mark class="G3">and a</mark>
+    <kbd class="C4">&lt;code&gt;</kbd>
+    <kbd class="C4">&lt;code&gt;</kbd>
+    <kbd class="C4">there</kbd></mark>
+    <mark class="G3" style="display:block">
+    <kbd class="C4"><kbd class="C4">Something fun</kbd></kbd>
+    <kbd class="C4"><kbd class="C4">with onclick,</kbd></kbd>
+    <kbd class="C4"><kbd class="C4">keepin' it</kbd></kbd>
+    <kbd class="C4"><kbd class="C4">semantic!</kbd></kbd>
+    </mark>
+
+    <kbd class="C4" style="display:block">Old
+    <kbd class="C4"><kbd class="C4"><mark class="G3">McDonald</mark></kbd></kbd>
+    <i class="A3">had</i>
+    <i class="A3">a</i>
+    <mark class="G3"><mark class="G3">webpage,</mark></mark>
+    <span class="E4">E</span>
+    <span class="E4">I</span>
+    <strong class="D4">E</strong>
+    <strong class="D4">I</strong>
+    <kbd class="C4">O</kbd></kbd>
+
+    <!-- SONG END HERE -->
+  </body>
+</html>
