@@ -20,4 +20,4 @@ Or you could run
 sbt fullLinkJSAndCopy
 ```
 
-to invest time in generating and then copyin an optimized *production* version of `main.js`.
+to invest time in generating and then copying an optimized *production* version of `main.js`.
