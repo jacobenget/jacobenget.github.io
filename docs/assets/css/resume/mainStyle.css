@@ -90,6 +90,7 @@ div#strengths li {
 	background-position: 0.2em .45em;
 	padding-left: 2.0em;
 	margin-top:5px;
+	margin-right:50px;
 }
 
 /**********************************************/
@@ -129,19 +130,11 @@ div.extra {
 
 /*********************************************/
 
-div#technicalSkillsText {
-	position:relative;
-}
-
-span.skillGroup {
+.skillGroup {
 	font-weight:bold;
 	font-size:1.1em;
-	width:120px;
-}
-
-span.skills {
-	position:absolute;
-	left:120px;
+	width:110px;
+	vertical-align: top;
 }
 
 
