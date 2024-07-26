@@ -18,7 +18,7 @@ Also, you can browse the source code for this game in these three files:
 - [Main.scala](src/main/scala/Main.scala) - UI logic of the Tic-Tac-Toe game
 - [GameAI.scala](src/main/scala/GameAI.scala) - Implementation of the generic AI descripted above
 
-<sup>*</sup> - I also built this as part of an application to the [Recurse Center](https://www.recurse.com/) in fall 2023!
+<sup>*</sup> - I also built this as part of an application to the [Recurse Center](https://www.recurse.com/) in fall 2023. (I got accepted!)
 
 ## Building
 This tool leverages [Scala.js](https://www.scala-js.org/) and [sbt](https://www.scala-sbt.org/) to generate a single `main.js` file, orginized as an ECMAScript module, which is then copied over to the `docs` folder where the main contents of the related website live, which is where the script is served up from.
