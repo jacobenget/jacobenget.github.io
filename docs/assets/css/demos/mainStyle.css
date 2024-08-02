@@ -13,6 +13,7 @@ div.demoRow {
 	/*overflow:auto;*/	/*I THINK I DON'T WANT THIS ENABLED BECAUSE IT PRODUCES SCROOL BARS ON THE ROWS?|*/
 	padding-bottom:1px;
 	margin-bottom:7px;/*20px;*//*6px;*/
+	display: flex;
 }
 
 /*
@@ -107,6 +108,7 @@ div#demoDetailWrapper span.nextLink {
 div#demoTitleBar {
 	margin-top:2em;
 	margin-bottom:3em;
+	display:flex;
 }
 
 img#headerThumbnail {
@@ -116,7 +118,7 @@ img#headerThumbnail {
 
 span#entireDemoTitle {
 	position:relative;
-	bottom:20px;
+	top:12px;
 	left:20px;
 }
 
