@@ -15,28 +15,27 @@ associated_top_level_page: demos
         This is a flash animation I completed for an assignment in a 2D animation class.  The assignment was to create an animation that demonstrated the concept of <i>weight and flow</i>.  I had a lot of fun working on this project, especially when writing ActionScript to create effects and control the animation.  The last half of the animation (beginning about a minute or so in) loops indefinitely with little bits of randomization.  Some may call this a fancy screen saver, and I can't really disagree.  But I still think it's effective at demonstrating how much fun you can have with just a few lines of code.  The music is "Over The Pond" by The Album Leaf.
     </div>
     
-    <div class="centerMe paragraph" id="syntheticSnowFLashContainer">
-        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="440" height="320" name="synSnow" align="middle">
-            <param name="movie" value="/assets/flash/synSnow.swf" />
-            <param name="quality" value="high" />
-            <param name="bgcolor" value="#5a5a5a" />
-            <param name="allowfullscreen" value="false" />
-            <param name="allowscriptaccess" value="sameDomain" />
-            <param name="flashvars" value="swfURL=/assets/flash/SyntheticSnow.swf&amp;musicURL=/assets/flash/AlbumLeafOverThePond64.mp3" />
-            <object type="application/x-shockwave-flash" data="/assets/flash/synSnow.swf" width="440" height="320" align="middle">
-                <param name="quality" value="high" />
-                <param name="bgcolor" value="#5a5a5a" />
-                <param name="allowfullscreen" value="false" />
-                <param name="allowscriptaccess" value="sameDomain" />
-                <param name="flashvars" value="swfURL=/assets/flash/SyntheticSnow.swf&amp;musicURL=/assets/flash/AlbumLeafOverThePond64.mp3" />
-                <a href="http://www.adobe.com/go/getflashplayer">
-                    <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
-                </a>
-            </object>
-        </object>
-    
-        <script src="/assets/js/ruffle/nightly-build-2023_12_07-web-selfhosted/ruffle.js"></script>
-    </div>
+    <div class="centerMe paragraph" id="syntheticSnowFlashContainer"></div>
+
+    <script type="text/javascript">
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("syntheticSnowFlashContainer");
+            container.appendChild(player);
+            player.style.width = "440px";
+            player.style.height = "320px";
+
+            player.load({
+                url: "/assets/flash/synSnow.swf",
+                parameters: {
+                    swfURL: "/assets/flash/SyntheticSnow.swf",
+                    musicURL: "/assets/flash/AlbumLeafOverThePond64.mp3",
+                }
+            });
+        });
+    </script>
+    <script src="/assets/js/ruffle/nightly-build-2023_12_07-web-selfhosted/ruffle.js"></script>
 </div>
 <div class="lastExtrasSection">
     <div class="paragraph">
