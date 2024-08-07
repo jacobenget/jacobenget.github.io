@@ -19,12 +19,18 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 	
 	if (wadImages === undefined) {	// error occurred
 		console.log(responseToRequest);
+		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 		var errorContainer = document.createElement("div");
 		errorContainer.className = "errorContainer";
 		errorContainer.innerHTML = "An error was encountered while processing the data you submitted! Perhaps the data wasn't a WAD file intended for Doom 1?";
 		parentOfImages.appendChild(errorContainer)
 	} else {
 		var imgElementForNamedImage = function(namedImage) {
+		  // TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+			// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		  // And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 			var imgElement = document.createElement("img");
 			imgElement.src = "data:image/png;base64," + namedImage.imageAsBase64EncodedPng;
 			imgElement.title = namedImage.name;
@@ -33,6 +39,9 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 		}
 		var processSetOfImages = function(title, description, images, parentOfImages) {
 			if (images.length > 0 ) {
+				// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+				// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		    // And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 				var container = document.createElement("div");
 				container.className = "sectionContainer";
 				
@@ -64,6 +73,9 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 			}
 		}
 
+		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 		var resultHeader = document.createElement("div");
 		resultHeader.className = "resultHeader";
 		
@@ -89,17 +101,26 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 	}
 
 	var createTimingDiv = function(description, time_in_ms) {
+		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 		var timingInformation = document.createElement("div");
 		timingInformation.innerHTML = description + ": " + (time_in_ms / 1000) + " seconds";
 		return timingInformation;
 	}
 
 	var createTimingListItem = function(description, time_in_ms) {
+		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 		var listItem = document.createElement("li");
 		listItem.appendChild(createTimingDiv(description, time_in_ms));
 		return listItem;
 	}
 
+	// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+	// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+	// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 	var statsSection = document.createElement("div");
 	statsSection.id = "stats";
 	parentOfImages.appendChild(statsSection);
@@ -154,6 +175,9 @@ var onDragLeave = function(event) {
 }
 
 var extractLabelFromAnchorHtml = function(anchorHtml) {
+	// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+	// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+	// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 	var tempDiv = document.createElement("div");
 	tempDiv.innerHTML = anchorHtml;
 	var anchors = tempDiv.getElementsByTagName("A");
@@ -266,6 +290,9 @@ var onDrop = function(loadingImage, parseWadData) {
 		var maxLengthForUriLabel = 30;
 		var labelForLoading = "Processing \"" + uriLabel.substring(0, maxLengthForUriLabel) + (uriLabel.length > maxLengthForUriLabel ? "..." : "") + "\" ...";
 		
+		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
+		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 		var dropAreaContentsWhileLoading = document.createElement("div");
 		dropAreaContentsWhileLoading.className = "contents";
 		var loadIcon = document.createElement("img");
