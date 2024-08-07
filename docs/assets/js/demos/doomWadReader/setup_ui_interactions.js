@@ -10,6 +10,29 @@ var requestWithGET = function(url) {
 		})
 }
 
+/**
+ * @typedef {Object} Image - An image
+ * @property {string} name - a user-facing identifier for this image
+ * @property {string} imageAsBase64EncodedPng - the graphical data for this image, in png format, encoded via Base64
+ */
+
+/**
+ * @typedef {Object} WadImages - A collection of images that all belong to a single WAD file
+ * @property {Image[]} sprites - array of sprites in a WAD file
+ * @property {Image[]} flats - array of flats in a WAD file
+ * @property {Image[]} textures - array of textures in a WAD file
+ * @property {Image[]} otherGraphics - array of otherGraphics in a WAD file
+ */
+
+/**
+ * @param {Object} responseToRequest
+ * @param {WadImages} [responseToRequest.wadImages] - collection of images from WAD, is missing if there was an issue processing the WAD
+ * @param {Object} [responseToRequest.timings]
+ * @param {number} responseToRequest.timings.timeToParseFile_in_ms
+ * @param {number} responseToRequest.timings.timeToBuildImages_in_ms
+ * @param {number} elapsedTime - number of ms it took to completely process the WAD file
+ * @param {string} [labelForDoomAssets] - optional user-facing identifier for the WAD file that was processed, must be present if responseToRequest.wadImages is present
+ */
 var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAssets) {
 	var wadImages = responseToRequest.wadImages
 	var parentOfImages = document.getElementById('resultsGoHere');
