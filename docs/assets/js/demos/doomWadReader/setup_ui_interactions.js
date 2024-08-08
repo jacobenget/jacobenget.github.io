@@ -286,21 +286,59 @@ var onDrop = function(loadingImage, parseWadData) {
 				});
 			}
 
-			promiseOfWadData
-				.then(possiblyUnzipAndConverToArraybuffer)
-				.then(parseWadData)
-				.then(
-					function (parsedData) {
-						onLoadFinish();
-						var timeAfterRequest = (new Date()).getTime();
-						displayDoomAssets(parsedData, timeAfterRequest - timeBeforeRequest, labelOfData);
-					},
-					function (_errorReason) {
-						onLoadFinish();
-						var timeAfterRequest = (new Date()).getTime();
-						displayDoomAssets("Error occurred with this reason: " + _errorReason, timeAfterRequest - timeBeforeRequest);
-					}
-				);
+			const promiseOfParsedData =
+				promiseOfWadData
+					.then(possiblyUnzipAndConverToArraybuffer)
+					.then(parseWadData);
+			
+			/************************/
+			// NOTE: each instance of TEST CODE below could be enabled in place of the above assignment to promiseOfParsedData
+			// in order to test each related case
+			/************************/
+
+			// TEST CODE: WAD with some images
+			/*
+			const aTestImage = {
+				name: "TestImage",
+				imageAsBase64EncodedPng: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+			};
+
+			const result = {
+				wadImages: {
+					sprites: [aTestImage],
+					flats: [aTestImage],
+					textures: [aTestImage],
+					otherGraphics: [aTestImage],
+				},
+				timings: {
+					timeToParseFile_in_ms: 43,
+					timeToBuildImages_in_ms: 42,
+				}
+			}
+			*/
+			//const promiseOfParsedData = Promise.resolve(result);
+			
+			// TEST CODE: WAD with no images
+			//const promiseOfParsedData = Promise.resolve({wadImages: {sprites: [],flats: [],textures: [],otherGraphics: []},});
+
+			// TEST CODE: WAD was processed but it resulted in an 'undefined' set of images 
+			//const promiseOfParsedData = Promise.resolve({});
+
+			// TEST CODE: Error processing WAD
+			//const promiseOfParsedData = Promise.reject("This failed because this is a test with explicit failure!");
+
+			promiseOfParsedData.then(
+				function (parsedData) {
+					onLoadFinish();
+					var timeAfterRequest = (new Date()).getTime();
+					displayDoomAssets(parsedData, timeAfterRequest - timeBeforeRequest, labelOfData);
+				},
+				function (_errorReason) {
+					onLoadFinish();
+					var timeAfterRequest = (new Date()).getTime();
+					displayDoomAssets("Error occurred with this reason: " + _errorReason, timeAfterRequest - timeBeforeRequest);
+				}
+			);
 		};
 		
 		var uriLabel = getLabelFromDndEvent(event);
