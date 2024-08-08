@@ -25,7 +25,7 @@ var requestWithGET = function(url) {
  */
 
 /**
- * @param {Object} responseToRequest
+ * @param {(Object|string)} responseToRequest
  * @param {WadImages} [responseToRequest.wadImages] - collection of images from WAD, is missing if there was an issue processing the WAD
  * @param {Object} [responseToRequest.timings]
  * @param {number} responseToRequest.timings.timeToParseFile_in_ms
