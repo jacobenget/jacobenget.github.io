@@ -113,20 +113,25 @@ div#technicalSkillsText {
 
 /***************** Professional experience *****************************/
 
-/* All titles shall appear a bit bigger and bold */
+/* All company names shall appear a bit bigger and bold */
+#professionalExperience .company .details .name {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#professionalExperience .company .details {
+	/* Put a bit of spacing between the title of the company and the optional positions below it */
+	margin-bottom: 0.5em;
+}
+
+/* All titles shall appear bold */
 #professionalExperience .title {
 	font-weight: bold;
-	font-size: 1.1em;
 }
 
 /* Put a bit of spacing between each company entry */
 #professionalExperience .company {
 	margin-bottom: 2em;
-}
-
-/* Put a bit of spacing between the details of the company and the optional positions below it */
-#professionalExperience .company > .details {
-	margin-bottom: 0.5em;
 }
 
 /* Put a bit of spacing between each position at a company */
