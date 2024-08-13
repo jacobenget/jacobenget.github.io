@@ -5,6 +5,7 @@
     <link rel="stylesheet" media="screen" href="/assets/css/{{ page.associated_top_level_page }}/mainStyle.css">
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png">
     <title>jacob enget&nbsp;&nbsp;|&nbsp;&nbsp;{{ page.associated_top_level_page }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <div id="container">
@@ -21,7 +22,7 @@
           {% for top_level_page in top_level_pages %}
           <div class="buttonContainer">
             <a class="increaseTextSize" href="/{{ top_level_page }}">
-              <div id="button{{ forloop.index }}" class="buttonBody {% if top_level_page == page.associated_top_level_page %} mainButtonDontAnimate {% else %} mainButtonAnimate {% endif %}">
+              <div id="button{{ forloop.index }}" class="buttonBody {% if top_level_page == page.associated_top_level_page %} selected {% else %} notSelected {% endif %}">
                 <span class="buttonContents">
                   {% if top_level_page == page.associated_top_level_page %}
                   <img alt="" class="largeArrow" src="/assets/images/greekArrow.gif"/>
@@ -34,16 +35,8 @@
           {% endfor %}
         </div>
         <div id="content">
-          <div id="contentBody">
-            <div id="contentInclude">
-              {{ content }}
-            </div>
-          </div>
+          {{ content }}
         </div>
-        <div id="toHoldFooterAtBottom">&nbsp;</div>
-      </div>
-      <div id="footer">
-        
       </div>
     </div>
   </body>

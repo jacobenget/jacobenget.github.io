@@ -7,52 +7,46 @@ associated_top_level_page: demos
 ---
 
 
-<div class="extrasSection">
-    <div class="paragraph">
-        <div class="extrasHeader">
-            synthetic snow
-        </div>
-        This is a flash animation I completed for an assignment in a 2D animation class.  The assignment was to create an animation that demonstrated the concept of <i>weight and flow</i>.  I had a lot of fun working on this project, especially when writing ActionScript to create effects and control the animation.  The last half of the animation (beginning about a minute or so in) loops indefinitely with little bits of randomization.  Some may call this a fancy screen saver, and I can't really disagree.  But I still think it's effective at demonstrating how much fun you can have with just a few lines of code.  The music is "Over The Pond" by The Album Leaf.
-    </div>
-    
-    <div class="centerMe paragraph" id="syntheticSnowFlashContainer"></div>
+<h3>synthetic snow</h3>
+<p>
+    This is a flash animation I completed for an assignment in a 2D animation class.  The assignment was to create an animation that demonstrated the concept of <i>weight and flow</i>.  I had a lot of fun working on this project, especially when writing ActionScript to create effects and control the animation.  The last half of the animation (beginning about a minute or so in) loops indefinitely with little bits of randomization.  Some may call this a fancy screen saver, and I can't really disagree.  But I still think it's effective at demonstrating how much fun you can have with just a few lines of code.  The music is "Over The Pond" by The Album Leaf.
+</p>
 
-    <script type="text/javascript">
-        window.addEventListener("load", (event) => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            const container = document.getElementById("syntheticSnowFlashContainer");
-            container.appendChild(player);
-            player.style.width = "440px";
-            player.style.height = "320px";
+<div id="syntheticSnowFlashContainer"></div>
 
-            player.load({
-                url: "/assets/flash/synSnow.swf",
-                parameters: {
-                    swfURL: "/assets/flash/SyntheticSnow.swf",
-                    musicURL: "/assets/flash/AlbumLeafOverThePond64.mp3",
-                }
-            });
+<script type="text/javascript">
+    window.addEventListener("load", (event) => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("syntheticSnowFlashContainer");
+        container.appendChild(player);
+        player.classList.add("syntheticSnowFlash");
+
+        player.load({
+            url: "/assets/flash/synSnow.swf",
+            parameters: {
+                swfURL: "/assets/flash/SyntheticSnow.swf",
+                musicURL: "/assets/flash/AlbumLeafOverThePond64.mp3",
+            }
         });
-    </script>
-    <script src="/assets/js/ruffle/nightly-build-2023_12_07-web-selfhosted/ruffle.js"></script>
-</div>
-<div class="lastExtrasSection">
-    <div class="paragraph">
-        <div class="extrasHeader">
-            anagram press
-        </div>
-        In the Summer of 2008 I developed a porfolio website for my good friend, illustrator and designer, Chandler O'Leary. 
-        I was given a set of design documents detailing how the site was to look. 
-        And from there I sliced up the mockups, coded the html and css, and set up hosting for the site. 
-        My biggest accomplishment was engineering the site in a modular and intuitive fashion so that it
-        could be easily and confidently updated by the owner, who had no web development experience.
-        It was great to hear Chandler say "Oh, that's all?!" when I explained to her how to exchange image
-        detail pages in the portfolio.
-    </div>
-    <div class="lastParagraph">
-        This website was originally up at <a class="boldMe" href="http://www.anagram-press.com">www.anagram-press.com</a>
-        but was completely redesigned in 2014 to (unlike this site!) keep with the times, and I didn't have anything to do with the newer version of the site. 
-        I still keep this mention of Anagram Press, and my involvement, here in memory of Chandler, who sadly passed away in 2023.
-    </div>
-</div>
+    });
+</script>
+<script src="/assets/js/ruffle/nightly-build-2023_12_07-web-selfhosted/ruffle.js"></script>
+
+<hr/>
+
+<h3>anagram press</h3>
+<p>
+    In the Summer of 2008 I developed a porfolio website for my good friend, illustrator and designer, Chandler O'Leary. 
+    I was given a set of design documents detailing how the site was to look. 
+    And from there I sliced up the mockups, coded the html and css, and set up hosting for the site. 
+    My biggest accomplishment was engineering the site in a modular and intuitive fashion so that it
+    could be easily and confidently updated by the owner, who had no web development experience.
+    It was great to hear Chandler say "Oh, that's all?!" when I explained to her how to exchange image
+    detail pages in the portfolio.
+</p>
+<p>
+    This website was originally up at <a class="boldMe" href="http://www.anagram-press.com">www.anagram-press.com</a>
+    but was completely redesigned in 2014 to (unlike this site!) keep with the times, and I didn't have anything to do with the newer version of the site. 
+    I still keep this mention of Anagram Press, and my involvement, here in memory of Chandler, who sadly passed away in 2023.
+</p>

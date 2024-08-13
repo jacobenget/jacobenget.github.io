@@ -5,20 +5,15 @@ associated_top_level_page: demos
 ---
 
 <div id="thumbnailTable">
-  <div id="demoTableHeader">
-    <span>please click an image to view demo detail</span>
-  </div>
-  
-  {% for demo in site.demos %}
-  <div class="demoRow">
-    <a class="demoThumbnailLink" href="{{ demo.url }}">
-      <span class="demoThumbnailRow">
-        <img alt="" class="demoThumbnail slideIn" src="/assets/images/demos/{{ demo.demo_id }}/thumbnail.jpg"/>
-        <span class="demoInfo">
-          <span class="demoTitle">{{ demo.title }}</span><span class="demoDescription">{{ demo.description }}</span>
-        </span>
-      </span>
+  <div class="demos">
+    {% for demo in site.demos %}
+    <a href="{{ demo.url }}">
+      <div class="demoRow iconicHeader">
+        <div class="title">{{ demo.title }}</div>
+        <div class="description">{{ demo.description }}</div>
+        <img alt="" class="thumbnail" src="/assets/images/demos/{{ demo.demo_id }}/thumbnail.jpg"/>
+      </div>
     </a>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>

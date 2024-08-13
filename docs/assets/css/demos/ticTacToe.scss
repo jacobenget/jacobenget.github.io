@@ -6,92 +6,141 @@ $color-for-player-o: #0e3366;
 $player-x-lighten-factor: 45%;
 $player-o-lighten-factor: 70%;
 
-div#ticTacToeGame {
-  overflow: auto;
-  padding: 20px 20px 20px 20px;
-}
-
-div#ticTacToeGame .leftPane {
-  float: left;
-  width: 300px;
-  padding-top: 60px;
-}
-
-div#ticTacToeGame .leftPane div {
-  display: flex;
-  justify-content: center;
-  white-space:pre;
-}
-
-.leftPane .status {
-  font-size: 20px;
-  padding-bottom: 60px;
-}
-
-.leftPane .playerTypeSelect {
-  font-size: 14px;
-  padding-bottom: 10px;
-}
-
-.leftPane button {
-  width: 80%;
-  margin-top: 64px;
-}
-
-div#ticTacToeGame .rightPane {
-  float: right;
-}
-
-td {
-  width: 100px;
-  height: 100px;
-}
-
-table.board {
-  margin: 20px auto;
-  border-collapse: collapse;
-}
-
-table.board td.middleColumn {
+/* Create the Tic-Tac-Toe board by adding vertical borders around the table entries in the middle/2nd coloumn... */
+table.board td:nth-child(2) {
   border-left: 2px solid black;
   border-right: 2px solid black;
 }
-
-table.board td.middleRow {
+/* ... and by adding horizontal borders around the tables entries in the middle/2nd row */
+table.board tr:nth-child(2) td {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
 }
-
-table.board td {
-  text-align: center;
-  font-size: 50px;
+table.board {
+  border-collapse: collapse;  // this is needed so the adjacent cells share a border, which is the look we're going for
 }
 
+/* Marks on the board for a specific player should be colored according to that player's color */
 .tictactoe-markForPlayerX {
   color: $color-for-player-x;
 }
-
 .tictactoe-markForPlayerO {
   color: $color-for-player-o;
 }
 
+/* A player hovering over an available spot on the board should result in that spot being slightly colored with the player's color */
 table.board td.tictactoe-openForPlayerX:hover {
   background-color: lighten($color-for-player-x, $player-x-lighten-factor);
 }
-
 table.board td.tictactoe-openForPlayerO:hover {
   background-color: lighten($color-for-player-o, $player-o-lighten-factor);
 }
 
+/* If the game finishes with a player winning then we want to highlight, with the player's color, the spots contributing to their win */
 table.board td.tictactoe-contributedToWinOfPlayerX {
   background-color: lighten($color-for-player-x, $player-x-lighten-factor);
 }
-
 table.board td.tictactoe-contributedToWinOfPlayerO {
   background-color: lighten($color-for-player-o, $player-o-lighten-factor);
 }
 
-/* The footnote on this page necessitates a bit more spacing before the footer*/
-#demoIncludeContents {
-  padding-bottom: 20px;
+/* Formatting and placement of UI pieces */
+
+#ticTacToeGame {
+  margin-block: 3em;
+}
+
+.status {
+  font-size: larger;
+}
+
+.board tr td {
+  text-align: center;
+}
+
+
+#ticTacToeGame {
+  display: grid;
+  // 16em seems to be enough width in the left column so the game status text never wraps
+  grid-template-columns: max-content 16em;
+  grid-template-rows: repeat(4, auto);
+  column-gap: 3em;
+  row-gap: 0.6em;
+  container: gameWrapper / inline-size;  // so a container-query can be done 
+	justify-content: center;
+  justify-items: center;
+}
+
+/*
+  We want similar controls (the two player select controls) to be visible grouped,
+  and the other controls to be offset some but still visually 'balanced'
+
+  We achieve this by placing the status and the first player select control in the 'bottom' of their box
+  ...
+  */
+.status,
+.playerTypeSelect {
+  align-self: self-end;
+}
+/*
+  ...
+  and by placing the second player select control and the "Restart Game" button in the 'top' of their box
+  */
+.playerTypeSelect + .playerTypeSelect,
+.newGame {
+  align-self: self-start;
+}
+
+/* tictactoe board take up all rows in the first column */
+.board {
+  grid-row-start: 1;
+  grid-row-end: 5;
+}
+
+// Explicitly size the cells in the tictactoe board, so they don't change size when their contents change
+.board tr td {
+  font-size: 300%;
+  width: 2em;
+  height: 2em;
+}
+
+
+/*
+  The tictactoe board itself has a width and height of 18em, and the accompanying
+  instructions take up a similar amount of space, so if the total available
+  width in the surrounding container is less then 36em, plus some padding (we'll go with 6em),
+  then in order to keep the tictactoe at a large enough size that it's playable,
+  reformat the game board so the 3x3 grid of the tic-tac-toe appears on its own row and
+  so can be as wide as possible there.
+	*/
+@container content (width < 42em) {
+  #ticTacToeGame {
+    margin-block: 1em;  /* Reduce the amount of whitespace around the game board */
+
+    /* Grid for game board is now just one column, with 5 rows */
+    grid-template-columns: auto;
+    grid-template-rows: repeat(5, minmax(3em, auto));
+  }
+
+  /*
+    Size of the game board shall now be now dependent upon the actual available space,
+    and we'll let it take up 84% of the possible width (a cqi is 1% of width,
+    and reach row has 2 <td>, and each <td> has a width that's 2x(font-size),
+    so we the font-size to (78%/3/2)=13%)
+    */
+  .board tr td {
+    font-size: 13cqi;
+  }
+
+  /* Have the board occupy the second row */
+  .board {
+    grid-row-start: 2;
+    grid-row-end: auto;
+  }
+  
+  /* And place the status on the first row */
+  .status {
+    grid-row-start: 1;
+    align-self: self-start;
+  }
 }

@@ -1,427 +1,329 @@
-div#thumbnailTable {
-	padding-left:35px;
-	padding-top:30px;
-	padding-bottom:35px;
+/**************** From demos homepage ****************/
+
+.demos {
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
 }
 
-div#demoTableHeader {
-	font-size:18px;
-	margin-bottom:35px;
+.iconicHeader {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
-div.demoRow {
-	/*overflow:auto;*/	/*I THINK I DON'T WANT THIS ENABLED BECAUSE IT PRODUCES SCROOL BARS ON THE ROWS?|*/
-	padding-bottom:1px;
-	margin-bottom:7px;/*20px;*//*6px;*/
+.iconicHeader .title {
+	font-weight: bold;
+	font-size: larger;
+	border-right: solid;
+	border-right-width: 1px;
+	padding-right: 0.8em;
+	margin-right: 0.8em;
+}
+
+.iconicHeader .description {
+	font-weight: normal;
+}
+
+.demoRow.iconicHeader {
 	display: flex;
 }
-
-/*
-div.demoThumbnail {
-	position:relative;
-	float:left;
-}
-*/
-
-/*
-a.demoThumbnailLink:hover {
-	color:#000000;
-}
-*/
-
-/*
-a.demoThumbnailLink:hover img{
-	border-color:#114466;
-}
-*/
-span.demoThumbnailRow {
-}
-
-img.demoThumbnail {
-	width:216px;
-	height:67px;
-	margin:0px;
-	padding:0px;
-	/*border:2px solid #FFFFFF;*/
-}
-
-span.demoInfo {
-	position:relative;
-	bottom:30px;
-	padding-left:30px;
-}
-
-span.demoInfo span {
-	padding-top:2px;
-	padding-bottom:2px;
-}
-
-span.demoTitle {
-	border-right:solid;
-	border-right-width:1px;
-	font-weight:bold;
-	padding-right:10px;
-	margin-right:10px;
-}
-
-span.demoDescription {
-}
-
-div#demoDetailWrapper {
-	margin-right:30px; /*<? echo "$mainRightLeftMargin"; ?>px;*/
-	margin-left:30px; /*<? echo "$mainRightLeftMargin"; ?>px;*/
-	margin-top:10px; /*<? echo "$mainTopMargin"; ?>px;*/
-	margin-bottom:5px; /*<? echo "$mainBottomMargin"; ?>px;*/
-	overflow:auto;
-}
-
-div#demoDetailWrapper a {
-	text-decoration:underline;
-}
-
-div#demoDetailWrapper a.dontUnderlineMe {
-	text-decoration:none;
-}
-
-div#demoDetailWrapper div.navigationBar {
-	font-size:10px;
-	position:relative;
-	text-align:center;
-	margin:0px;
-}
-
-div#demoDetailWrapper div#demoBottomBar {
-	margin-bottom:1px;
-}
-
-div#demoDetailWrapper span.previousLink {
-	position:absolute;
-	left:0;
-}
-
-div#demoDetailWrapper span.nextLink {
-	position:absolute;
-	right:0;
-	margin-right:1px;
-}
-
-div#demoTitleBar {
-	margin-top:2em;
-	margin-bottom:3em;
-	display:flex;
-}
-
-img#headerThumbnail {
-	width:162px;
-	height:50px;
-}
-
-span#entireDemoTitle {
-	position:relative;
-	top:12px;
-	left:20px;
-}
-
-span#entireDemoTitle span {
-	padding-top:2px;
-	padding-bottom:2px;
-}
-
-span#entireDemoTitle span.demoTitle {
-	font-size:18px;;
-	padding-right:13px;
-	margin-right:13px;
-}
-
-span#entireDemoTitle span.demoDescription {
-	position:relative;
-	bottom:2px;
-}
-
-
-
-/*******************************/
-
-div#demoIncludeContents .centerMe{
-	margin: 0 auto;
-	text-align:left;
-}
-
-div#demoIncludeContents .centerMeContainer{
-	text-align:center;
-}
-
-div#demoIncludeContents div.paragraph {
-	margin-bottom:4em;
-}
-
-div#demoIncludeContents div.lastParagraph {
-	margin-bottom:3em;
-}
-
-
-div#demoIncludeContents ul {
-	list-style-type:none;
-	padding:0px;
-	padding-top:1em; 
-	margin:0px;
-	/*
-	margin-left: -0.2em;*/
-}
-
-
-div#demoIncludeContents ul ul {
-	padding:0px;
-	padding-left:3em;
-}
-
-
-div#demoIncludeContents li {
-	background-image: url(../../images/itemDot.gif);
-	background-repeat:no-repeat;
-	background-position: 0.2em .45em;
-	padding-left: 2.0em;
-	margin-top:5px;
-}
-
-div#demoIncludeContents li ul li {
-	background-image: url(../../images/itemDot.gif);
-	background-repeat:no-repeat;
-	background-position: 0.2em .45em;
-	padding-left: 2.0em;
-	margin-top:5px;
-}
-
-/*
-<?
-	$numberOfPictures = 4;
-	$betweenPictures = 20;
-	$widthOfPictures = 140;
-	$heightOfPictures = $widthOfPictures;
 	
-	$imageRowWidth = ( ($numberOfPictures - 1) * ( $betweenPictures + $widthOfPictures) ) + $widthOfPictures;
-?>
-*/
-
-div#demoIncludeContents img.maze {
-	height:140px; /*<? echo "$heightOfPictures"; ?>px;*/
-	width:140px; /*<? echo "$widthOfPictures"; ?>px;*/
-	margin-right:20px; /*<? echo "$betweenPictures"; ?>px;*/
+.demoRow.iconicHeader .title {
+	font-size: 100%;	/* Remove bold-ness usually applied to the title */
+}
+	
+.demoRow.iconicHeader .thumbnail {
+	order: -1;	/* Move the thumbnail to the beginning of the flex grid */
+	width: 30%;
+	padding-right: 2em;
+}
+		
+.demoRow.iconicHeader img.thumbnail {
+	aspect-ratio: 3;
 }
 
-div#demoIncludeContents img.lastOfRow {
-	margin-right:0px;
+
+/**************** From page showing a single demo ****************/
+
+/* Inherited behavior is that anchor tags do NOT have underlines
+ but we'd like to change that here so all anchors in the contents
+ of a demo have underlines */
+#demoIncludeContents a {
+	text-decoration: underline;
 }
 
-/*************Doom Wad Reader Specific****************/
-
-div#dropWadHere {
-	border:solid;
-	border-width:1px;
-	border-style:dashed;
-	/*border-radius: 5px;*/
-	padding:4px;
-	height:100px;
+#demoIncludeContents {
+	padding-bottom: 2em;
 }
 
-div#dropWadHere * {
+#demoDetailWrapper .navigationBar {
+	font-size: smaller;
+	display: flex;
+	flex-direction: row;
+}
+
+#demoDetailWrapper .navigationBar .previousLink {
+	flex-grow: 1;
+	flex-basis: 0;	/* So the actual width this eventually takes up isn't dependent upon its natural/auto width */
+}
+
+@media (width <= 900px) {
+	/* On not not-so-wide displays the main navigation menu is just at the top of the page,
+	 so a user at the top of a demo page always has a button close by to press to
+	 get back to the demos home, so this custom button to do just that at the top
+	 of each demo page can just be hidden */
+	#demoDetailWrapper #demoTopBar .demosHomeLink {
+		display: none;
+	}
+}
+
+#demoDetailWrapper .navigationBar .nextLink {
+	flex-grow: 1;
+	flex-basis: 0;	/* So the actual width this eventually takes up isn't dependent upon its natural/auto width */
+	text-align: right;
+}
+
+#demoDetailWrapper #demoTopBar {
+	margin-bottom: 2rem;
+}
+
+#demoDetailWrapper #demoBottomBar {
+	margin-top: 1rem;
+}
+
+
+/*
+	NOTE: using :where here in order to NOT introduce a more specific selector that would indicentally override 
+	the attempt below to restyle a .demoRow.iconicHeader based on the width of its container
+	*/
+:where(#demoDetailWrapper) .demoRow.iconicHeader .title {
+	font-size: 130%;
+}
+:where(#demoDetailWrapper) .demoRow.iconicHeader .thumbnail {
+	width: 25%;
+	padding-right: 1.5em;
+}
+
+
+/*
+	When the container listing the demos or a single demo isn't particularly wide,
+	change the row for each demo so the thumbnail fully expands to fill the available width,
+	the title appears above the thumbnail, and the description appears below the thumbnail
+	*/
+@container content (width < 49em) {
+	.demos {
+		gap: 1.6rem;
+	}
+
+	.demoRow.iconicHeader {
+		flex-direction: column;
+		align-items: normal;
+	}
+	
+	.demoRow.iconicHeader .title {
+		font-size: 130%;
+		border-right: none;
+	}
+	
+	.demoRow.iconicHeader .thumbnail {
+		order: 0;	/* Move the thumbnail back to its initial spot in the order */
+		width: 100%;
+	}
+	
+	.demoRow.iconicHeader .description {
+		order: 1;	/* Move the demo decription to the end of the flex grid */
+		text-align: right;
+	}
+}
+
+
+
+/****************************************************************/
+/**************** Classes used by a specific demo ***************/
+/****************************************************************/
+
+
+/************* Doom Wad Reader Specific ****************/
+
+#dropWadHere {
+	border: 1px dashed;
+	padding: 0.25em;	/* Put a small amount of space between the border and the content of this item, which will be a different color */
+}
+
+/* The color of Drop Area changes through user interaction */
+#dropWadHere .inner {
+	background-color: #e8e8ef;
+}
+#dropWadHere.dropIsValid .inner {
+	background-color: #cacadb;
+}
+#dropWadHere.dropIsBeingProcessed .inner {
+	background-color: #cecece;
+}
+
+#dropWadHere * {
 	/* this is here to avoid 'dragLeave' from firing when a child element is entered, so highlighting the drop area only when the user is in the middle of a valid drop is as easy
-	as listening to 'dragEnter' and 'dragLeave'.  This approach was taken from here: */
+	as listening to 'dragEnter' and 'dragLeave'.  This approach was taken from here: https://medium.com/developer-rants/preventing-drag-events-from-triggering-over-child-elements-5700f385a95e */
 	pointer-events: none;
 }
 
-div#dropWadHere div.inner {
-	background-color:#e8e8ef;
-	height:100px;
-}
-
-div#dropWadHere.dropIsValid div.inner {
-	background-color:#cacadb;
-}
-
-div#dropWadHere.dropIsBeingProcessed div.inner {
-	background-color:#cecece;
-}
-
-div#dropWadHere img.icon {
-    vertical-align: middle;	/*so image is vertically aligned with the text next to it*/
-}
-
-div#dropWadHere img#dropIcon {
-    width: 58px;
-    height: auto;
-}
-
-div#dropWadHere div#label {
-    vertical-align: middle;	/*so image is vertically aligned with the text next to it*/
-    display: inline-block;
-}
-
-div#dropWadHere img#loadIcon {
-    height: 62px;
-    width: auto;
-    padding-right: 8px;
-}
-
-/*  approach used below for vertically and horizontally centering content found here: https://css-tricks.com/centering-css-complete-guide/ */
-
-div#dropWadHere .inner {
-  position: relative;
-}
-
-div#dropWadHere .contents {   
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-div#resultsGoHere div.resultHeader {
-	padding-top: 30px;
-	padding-bottom:6px;
-	border-bottom:solid;
-	border-bottom-width:1px;
-	border-bottom-color:#666666;
-}
-
-div#resultsGoHere div.resultHeader span.fileName {
-	font-size:18px;
-}
-
-div#resultsGoHere div.resultHeader span.fileName a {
-	text-decoration: none;
-}
-
-div#resultsGoHere div.sectionContainer,
-div#resultsGoHere div.noImagesContainer,
-div#resultsGoHere div.errorContainer {
-	padding-top: 20px;
-	padding-left: 10px;
-	padding-bottom:20px;
-	border-bottom:solid;
-	border-bottom-width:1px;
-	border-bottom-color:#666666;
-}
-
-div#resultsGoHere div.sectionContainer {
-	padding-top: 30px;
-}
-
-div#resultsGoHere div.sectionContainer div.header {
-	padding-bottom: 4px;
-}
-
-div#resultsGoHere div.sectionContainer div.header span.details span.title {
-	border-right:solid;
-	border-right-width:1px;
-	font-weight:bold;
-	padding-right:10px;
-	margin-right:10px;
-	font-size:16px;
-}
-
-div#resultsGoHere div.sectionContainer div.header span.details span.description {
-	position: relative;
-	bottom: 1px;
-}
-
-div#resultsGoHere .imageFromWAD {
-	padding:10px 20px 10px 0px;
-}
-
-div#resultsGoHere div#stats {
-	padding-top: 20px;
-}
-
-div#resultsGoHere div#stats div#label {
-	font-size:18px;
-}
-
-div#resultsGoHere div#stats div#contents {
-	padding-top: 10px;
-	padding-left: 10px;
-}
-
-div#resultsGoHere div#stats ul {
-	padding-top: 0px;
-}
-
-/*************3dmaze Specific****************/
-
-div.mazeDescriptionStep {
-	padding-bottom:1em;
-}
-
-
-div#demoIncludeContents div.imageRow {
-	border:none;
-	margin:0 auto 3em auto;
-	width:620px; /*<? echo "$imageRowWidth"; ?>px;*/
-}
-
-
-/************Samurai Specific*****************/
-
 /*
-<? 
-	$samuraiWidth = 550; 
-	$leftControlsPadding = 0;
-	$rightControlsPadding = $leftControlsPadding;
-	$controlsWidth =  $samuraiWidth - ( $leftControlsPadding + $rightControlsPadding );
-?>
+	When it comes to formatting the Drop Area we want these things:
+		1. Drop Area expands horizontally to fill the entire width of its parent container
+		2. Arrow and text in Drop Area are
+			- side-by-side horizontally, arrow on the left
+			- vertically centered relative to each other
+			- Have some visual padding vertically and horizontally, and this padding is symmetric in each direction
 */
 
-div#samuraiFlashContainer {
-	width:550px; /*<? echo "$samuraiWidth"; ?>px;*/
-	border:1px solid;/* #000000;*/
-	overflow:auto;
+#dropWadHere .contents {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5em;
+	gap: 1em;
 }
 
-div#samuraiControls {
-	/*width:<? echo "$controlsWidth"; ?>px;*/
-	padding-left:0px; /*<? echo "$leftControlsPadding"; ?>px;*/
-	padding-right:0px; /*<? echo "$rightControlsPadding"; ?>px;*/
-	padding-top:15px;
-	text-align:center;
+#dropWadHere img.icon {
+  height: 5em;
 }
 
-/*************Cycle 3467**********************/
 /*
-<? 
-	$cycle3467Width = 400; 
-	$leftDescriptionPadding = 0;
-	$rightDescriptionPadding = 0;
-	$descriptionWidth =  $cycle3467Width - ( $rightDescriptionPadding + $leftDescriptionPadding );
-?>
+	When it comes to formatting the results of the WAD parsing we want these things:
+		1. Identifier of the WAD should be larger text
+		2. Name of the category for the images should have my signature "name | description" formatting
+		3. Images should
+			- flow horizontally across all available width
+			- be displayed at their native size (I think?)
+			- Each be symmetrically surrounded by a comfortable amount of white space
 */
 
-div#cycle3467FlashContainer {
-	width:400px; /*<? echo "$cycle3467Width"; ?>px;*/
+.sectionContainer img {
+	display: inline;
+	margin: 0.5em;
 }
 
-div#cycle3467Description {
-	width:400px; /*<? echo "$descriptionWidth"; ?>px;*/
-	padding-left:0px; /*<? echo "$leftDescriptionPadding"; ?>px;*/
-	padding-right:0px; /*<? echo "$rightDescriptionPadding"; ?>px;*/
-	padding-top:15px;
+
+/************* 3dmaze Specific ****************/
+
+/* Center the main image in this demo */
+.main3dMazeImage {
+	text-align: center;
+}
+.main3dMazeImage img {
+	display: inline;
 }
 
-/***********Extras Specific*******************/
-
-div#syntheticSnowFLashContainer {
-	width:440px;
-	/*border:1px solid;*/
+/*
+	We want a row of images that equally spaces out 4 square images horizontally, with a bit of padding between them
+*/
+.imageRow {
+	display: flex;
+	gap: 2%;
+	padding-inline: 4%;
+	padding-block-end: 2%;
+	justify-content: center;
 }
 
-div.extrasHeader {
-	font-weight:bold;
-	font-size:18px;
-	padding-bottom:0.3em;
+.imageRow img {
+	aspect-ratio: 1;
 }
 
-div.extrasSection {
-	padding-bottom:2em;
+/* Put a bit of extra visual padding below a row of images */
+.imageRow {
+	margin-bottom: 2em;
 }
 
-div.lastExtrasSection {
+
+/************ Samurai Specific *****************/
+
+#samuraiControls {
+	padding-top: 1em;
+	text-align: center;
+}
+
+#samuraiFlashContainer {
+	border: 1px solid;
+	/* Not sure why, but applying this style removes some extra gap that appears between the bottom of the Flash content and the drawn border */
+	overflow: auto;
+}
+
+/*
+	The goal here was to get the Flash content to appear on the page in this way:
+		1. With its native aspect ratio (which we assume to be the aspect-ratio that it'll look the best at)
+		2. Having a width that is never more than a certain percentage (e.g. 80%) of the width of the surrounding content
+			- This is so the Flash content will attractively scale down on smaller viewports
+		3. Centered horizontally
+
+	Achieving this wasn't trivial because not all styles put on the 'samuraiFlash' class
+	(which is added dynamically to the generated <ruffle-player> tag, via the ruffle library)
+	seem to be make it through to the contained <canvas> that reprepresents the Flash content.
+
+	But the approach of (1) explicitly setting the width/height of the parent container #samuraiFlashContainer
+	to be exactly the width/height I want and (2) having .samuraiFlash be at most the size of its parent container
+	seems to work well.
+
+	One caveat is that ruffle doesn't seem to allow the Flash content to scale UP past its native width/height,
+	so we limit the max size of the surrounding container such that the Flash content is always nicely hugged by this container. 
+*/
+
+#samuraiFlashContainer {
+	/* Flash app on this page natively wants to be 550px by 400px */
+	width: min(80%, 550px);
+	aspect-ratio: 550 / 400;
+	margin-inline: auto;	/* center horizontally */
+}
+
+.samuraiFlash {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+/************* Cycle 3467 **********************/
+
+#cycle3467Container {
+	width: 80%;
+	margin-inline: auto;	/* center horizontally */
+}
+
+/* Have any text associated directly with the video (e.g. a video description) look visually different */
+#cycle3467Container p {
+	font-size: smaller;
+	text-align: center;
+	font-style: italic;
+}
+
+/*********** Extras Specific *******************/
+
+/*
+	The goal here was to get the Flash content to appear on the page in this way:
+		1. With its native aspect ratio (which we assume to be the aspect-ratio that it'll look the best at)
+		2. Having a width that is never more than a certain percentage (e.g. 80%) of the width of the surrounding content
+			- This is so the Flash content will attractively scale down on smaller viewports
+		3. Centered horizontally
+
+	Achieving this wasn't trivial because not all styles put on the 'syntheticSnowFlash' class
+	(which is added dynamically to the generated <ruffle-player> tag, via the ruffle library)
+	seem to be make it through to the contained <canvas> that reprepresents the Flash content.
+
+	But the approach of (1) explicitly setting the width/height of the parent container #syntheticSnowFlashContainer
+	to be exactly the width/height I want and (2) having .syntheticSnowFlash be at most the size of its parent container
+	seems to work well.
+
+	One caveat is that ruffle doesn't seem to allow the Flash content to scale UP past its native width/height,
+	so we limit the max size of the surrounding container such that the Flash content is always nicely hugged by this container. 
+*/
+
+#syntheticSnowFlashContainer {
+	/* Flash app on this page natively wants to be 550px by 400px */
+	width: min(80%, 550px);
+	aspect-ratio: 550 / 400;
+	margin-inline: auto;	/* center horizontally */
+}
+
+.syntheticSnowFlash {
+	max-width: 100%;
+	max-height: 100%;
 }

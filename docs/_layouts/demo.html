@@ -2,30 +2,43 @@
 layout: default
 ---
 
-<div id="demoDetailWrapper" class="gainLayout">
+<div id="demoDetailWrapper">
   <div class="navigationBar" id="demoTopBar">
-    {% if page.previous %}
-    <span class="previousLink"><a class="boldMe dontUnderlineMe" href={{ page.previous.url }}>&lt; previous</a></span>
-    {% endif %}
-    <span class="demosHomeLink"><a class="boldMe dontUnderlineMe" href="/demos">demos home</a></span>
-    {% if page.next %}
-    <span class="nextLink"><a class="boldMe dontUnderlineMe" href={{ page.next.url }}>next &gt;</a></span>
-    {% endif %}
+    <span class="previousLink">
+      {% if page.previous %}
+      <a class="boldMe" href={{ page.previous.url }}>&lt; previous</a>
+      {% endif %}
+    </span>
+    <span class="demosHomeLink"><a class="boldMe" href="/demos">demos home</a></span>
+    <span class="nextLink">
+      {% if page.next %}
+      <a class="boldMe" href={{ page.next.url }}>next &gt;</a>
+      {% endif %}
+    </span>
   </div>
-  <div id="demoTitleBar">
-    <img alt="" id="headerThumbnail" src="/assets/images/demos/{{ page.demo_id }}/thumbnail.jpg"/>
-    <span id="entireDemoTitle"><span class="demoTitle">{{ page.title }}</span><span class="demoDescription">{{ page.description }}</span></span>
+
+
+  <div class="demoRow iconicHeader">
+    <div class="title">{{ page.title }}</div>
+    <div class="description">{{ page.description }}</div>
+    <img alt="" class="thumbnail" src="/assets/images/demos/{{ page.demo_id }}/thumbnail.jpg"/>
   </div>
+  <br/>
   <div id="demoIncludeContents">
     {{ content }}
   </div>
+
   <div class="navigationBar" id="demoBottomBar">
-    {% if page.previous %}
-    <span class="previousLink"><a class="boldMe dontUnderlineMe" href={{ page.previous.url }}>&lt; previous</a></span>
-    {% endif %}
-    <span class="demosHomeLink"><a class="boldMe dontUnderlineMe" href="/demos">demos home</a></span>
-    {% if page.next %}
-    <span class="nextLink"><a class="boldMe dontUnderlineMe" href={{ page.next.url }}>next &gt;</a></span>
-    {% endif %}
+    <span class="previousLink">
+      {% if page.previous %}
+      <a class="boldMe" href={{ page.previous.url }}>&lt; previous</a>
+      {% endif %}
+    </span>
+    <span class="demosHomeLink"><a class="boldMe" href="/demos">demos home</a></span>
+    <span class="nextLink">
+      {% if page.next %}
+      <a class="boldMe" href={{ page.next.url }}>next &gt;</a>
+      {% endif %}
+    </span>
   </div>
 </div>

@@ -1,16 +1,15 @@
-
-div#aboutMe {
-	margin:35px;
-}
-
-div#aboutMe div.paragraph{
-	margin-bottom:2em;
-}
-
-div#aboutMe div.lastParagraph{
-	margin-bottom:0em;
-}
-
+/* Inherited behavoir is that anchor tags do NOT have underlines
+ but we'd like to change that here so all anchors in the about me section
+have underlines */
 div#aboutMe a {
-	text-decoration:underline;
+	text-decoration: underline;
+}
+
+/* Make it so the first paragraph doesn't inherit any top-margin */
+#aboutMe > p {
+  margin-block-start: 0;
+}
+
+#aboutMe > p + p {
+  margin-block-start: inherit;
 }

@@ -45,8 +45,7 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
 		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
 		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
-		var errorContainer = document.createElement("div");
-		errorContainer.className = "errorContainer";
+		var errorContainer = document.createElement("p");
 		errorContainer.innerHTML = "An error was encountered while processing the data you submitted! Perhaps the data wasn't a WAD file intended for Doom 1?";
 		parentOfImages.appendChild(errorContainer)
 	} else {
@@ -57,7 +56,6 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 			var imgElement = document.createElement("img");
 			imgElement.src = "data:image/png;base64," + namedImage.imageAsBase64EncodedPng;
 			imgElement.title = namedImage.name;
-			imgElement.className = "imageFromWAD";
 			return imgElement
 		}
 		var processSetOfImages = function(title, description, images, parentOfImages) {
@@ -68,19 +66,16 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 				var container = document.createElement("div");
 				container.className = "sectionContainer";
 				
-				var headerDivElement = document.createElement("div");
-				headerDivElement.className = "header";
-				container.appendChild(headerDivElement);
-			
-				var detailsSpanElement = document.createElement("span");
-				detailsSpanElement.className = "details";
-				headerDivElement.appendChild(detailsSpanElement);
+				var headerElement = document.createElement("h4");
+				headerElement.className = "iconicHeader";
+				container.appendChild(headerElement);
+
 				var titleSpanElement = document.createElement("span");
 				titleSpanElement.className = "title";
-				detailsSpanElement.appendChild(titleSpanElement);
+				headerElement.appendChild(titleSpanElement);
 				var descriptionSpanElement = document.createElement("span");
 				descriptionSpanElement.className = "description";
-				detailsSpanElement.appendChild(descriptionSpanElement);
+				headerElement.appendChild(descriptionSpanElement);
 				
 				titleSpanElement.innerHTML = title;
 				descriptionSpanElement.innerHTML = description;
@@ -88,7 +83,8 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 				for (var i = 0; i < images.length; i++) {
 					container.appendChild(imgElementForNamedImage(images[i]));
 				}
-				parentOfImages.appendChild(container)
+				parentOfImages.appendChild(container);
+				parentOfImages.appendChild(document.createElement("hr"));
 				return true;
 			}
 			else {
@@ -99,15 +95,11 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 		// TODO: use an HTML template element (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
 		// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
 		// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
-		var resultHeader = document.createElement("div");
-		resultHeader.className = "resultHeader";
-		
-		var fileNameSpanElement = document.createElement("span");
-		fileNameSpanElement.className = "fileName";
-		fileNameSpanElement.innerHTML = labelForDoomAssets;
-		resultHeader.appendChild(fileNameSpanElement);
-		
-		parentOfImages.appendChild(resultHeader)
+		var resultHeader = document.createElement("h3");
+		resultHeader.innerHTML = labelForDoomAssets;
+		parentOfImages.appendChild(resultHeader);
+
+		parentOfImages.appendChild(document.createElement("hr"));
 		
 		var spritesProcessed = processSetOfImages("sprites", "objects that appear inside a map", wadImages.sprites, parentOfImages);
 		var flatsProcessed = processSetOfImages("flats", "used on ceilings and floors", wadImages.flats, parentOfImages);
@@ -116,10 +108,10 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 	
 		if (!(flatsProcessed || spritesProcessed || texturesProcessed || otherGraphicsProcessed)) {
 			// let the user know that no images were found, good chance this WAD just introduces new maps using all the original image assets from doom
-			var errorContainer = document.createElement("div");
-			errorContainer.className = "noImagesContainer";
+			var errorContainer = document.createElement("p");
 			errorContainer.innerHTML = "No images were found while processing the WAD you submitted.  This is unfortunate, but not unexpected because many Doom WADs only introduce new maps using all the original image/texture assets from Doom.";
-			parentOfImages.appendChild(errorContainer)
+			parentOfImages.appendChild(errorContainer);
+			parentOfImages.appendChild(document.createElement("hr"));
 		}
 	}
 
@@ -145,13 +137,10 @@ var displayDoomAssets = function(responseToRequest, elapsedTime, labelForDoomAss
 	// so the structue, and any associated properties, of the Dom elements generted here is easier to grok at a glance.
 	// And maybe leverage <slot> elements for filling in the template? See here: https://developer.mozilla.org/en-US/docs/Web/API/Web_components#html_templates
 	var statsSection = document.createElement("div");
-	statsSection.id = "stats";
 	parentOfImages.appendChild(statsSection);
-	var statsLabel = document.createElement("div");
-	statsLabel.id = "label";
+	var statsLabel = document.createElement("h3");
 	statsLabel.innerHTML = "Stats";
 	var statsContents = document.createElement("div");
-	statsContents.id = "contents";
 	statsSection.appendChild(statsLabel);
 	statsSection.appendChild(statsContents);
 	statsContents.appendChild(createTimingDiv("Total time seen by browser", elapsedTime));

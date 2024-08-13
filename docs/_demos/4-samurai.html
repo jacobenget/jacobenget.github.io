@@ -6,10 +6,11 @@ layout: demo
 associated_top_level_page: demos
 ---
 
-<div class="paragraph">
+<p>
     This is a flash game I created with another student as our final project for a class in 2D animation during the Fall of 2007.  From the beginning, we had big ambitions.  The class focused on animation, but we wanted to create a piece that was highly interactive as well.  Our enthusiasm helped us cover the extra ground, but we continually realized how much work we had cut out for ourselves.  We reprioritized and redesigned our approach multiple times in order to finish the game on time.  But our long hours and perseverance paid off when it all came together into something that felt professional and was fun to play.
-</div>
-<div class="centerMe" id="samuraiFlashContainer"></div>
+</p>
+
+<div id="samuraiFlashContainer"></div>
 
 <script type="text/javascript">
     window.addEventListener("load", (event) => {
@@ -17,8 +18,7 @@ associated_top_level_page: demos
         const player = ruffle.createPlayer();
         const container = document.getElementById("samuraiFlashContainer");
         container.appendChild(player);
-        player.style.width = "550px";
-        player.style.height = "400px";
+        player.classList.add("samuraiFlash");
 
         player.load({
             url: "/assets/flash/Samurai.swf",
@@ -30,22 +30,24 @@ associated_top_level_page: demos
     });
 </script>
 <script src="/assets/js/ruffle/nightly-build-2023_12_07-web-selfhosted/ruffle.js"></script>
-<div id="samuraiControls" class="paragraph">
+
+<div id="samuraiControls">
     <div>Move the samurai with &larr;, &uarr;, and &rarr;</div>
     <div>Use 'c' for a fast attack</div>
     <div>Use 'z' for a strong attack</div>
 </div>
-<div class="lastParagraph">My partner and I took complementary roles on this project.  He handled most of the artistic side by designing the introduction animation and creating background art pieces for the game.  I tackled the technical aspects of the project by:
+<p>
+    My partner and I took complementary roles on this project.  He handled most of the artistic side by designing the introduction animation and creating background art pieces for the game.  I tackled the technical aspects of the project by:
+</p>
+<ul>
+    <li>Building a 2D game engine in ActionScript.  This engine handled:</li>
     <ul>
-        <li>Building a 2D game engine in ActionScript.  This engine handled:</li>
-        <ul>
-            <li>Screen Scrolling: adding and removing background objects as the samurai moves throughout the stage</li>
-            <li>User Interaction Components: user input, the timer, and the kill count</li>
-            <li>Collision Detection and Response</li>
-            <li>Gravity</li>
-            <li>Building the Environment: based on data read in</li>
-        </ul>
-        <li>Programming the zombies so they respond to the samurai's movements and his attacks.</li>
-        <li>Animating the samurai and the zombies and writing code to handle the animations according to the state of the game.</li>
+        <li>Screen Scrolling: adding and removing background objects as the samurai moves throughout the stage</li>
+        <li>User Interaction Components: user input, the timer, and the kill count</li>
+        <li>Collision Detection and Response</li>
+        <li>Gravity</li>
+        <li>Building the Environment: based on data read in</li>
     </ul>
-</div>
+    <li>Programming the zombies so they respond to the samurai's movements and his attacks.</li>
+    <li>Animating the samurai and the zombies and writing code to handle the animations according to the state of the game.</li>
+</ul>

@@ -1,140 +1,243 @@
 html {
 	height: 100%;
+	font-size: min(4vw, 16px);
+	background-color: #FFFFFF;
+  line-height: 1.3;
+	color: #333333;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+ Prevent font size inflation
+ See here for more context: https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/
+ */
+:root {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
 }
 
 body {
-	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color: #FFFFFF;
-	font-size: 16px;
-	color: #222222;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 
+/* Reset some img styles across the board, so images behave more naturally in layouts, and never have a border by default */
 img {
+	max-width: 100%;
+	display: block;
 	border: none;
 }
 
 a {
 	cursor: pointer;
-	text-decoration: none;
-	color: inherit;
+	text-decoration: none; /* by default anchors have no underline */
+	color: inherit; /* by default anchors have no unique coloring */
 }
 
-html .gainLayout {
-	height: 1%;
-}
-
-/******************  Entire Page  **********************/
-
-div#container {
-	width: 900px;
-	margin: 0 auto;
-}
-
-/******************  Main Vertical Layout  **********************/
-
-div#header {
-	height: 124px;
-}
-
-div#mainBody {
-}
-
-div#footer {
-	height: 120px;
-}
-
-/*****************  Header  ***********************/
-
-div#topBar {
-	text-align: right;
-	font-size: 0.85em;
-	margin-top: 0.5em;
-}
-
-/* Move the main image title just 1 pixel to the left, so it doesn't look so perfectly aligned */
-img#mainTitleImage {
-	position: relative;
-	left: -1px;
-}
-
-div#header div#mainTitle {
-	margin-top: 2em;
-}
-
-/****************  Menu with buttons and main content  ************************/
-
-div#menu {
-	float: left;
-	width: 172px;
-}
-
-div#content {
-	float: left;
-	width: 728px;
-}
-
-div#contentBody {
-	border: 1px solid #222222;
-	height: 100%;
-}
-
-div#contentInclude {
-	overflow: auto;
-}
-
-/***************  Menu with buttons  ******************/
-
-div.buttonContainer {
-	padding-bottom: 6px;
-	padding-right: 10px;
-}
-
-div.mainButtonDontAnimate {
-	font-size: 1.5em;
-}
-
+/* Links/anchors that wish to visually respond to the user hovering over them should have the class 'boldMe' */
 a.boldMe:hover {
 	color: #000000;
 }
 
-a.increaseTextSize:hover div.mainButtonAnimate {
-	font-size: 1.5em;
+/* Remove or replace some standard <ul> and <li> styling on all <ul> and <li> elements */
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
-div.buttonBody {
-	height: 50px;
-	line-height: 50px;
+ul ul {
+	padding-left: 2em;	/* indent subrows a bit more than usual, to give them more space visually */
+}
+
+li {
+	background-image: url(../images/itemDot.gif);
+	background-repeat: no-repeat;
+	background-position: 0.2em .45em; /* places the dot in a visually nice place */
+	padding-left: 1.5em; /* pushes the text to the right enough so the dot appears */
+	margin-top: 0.25em; /* put vertical spacing between items TODO: user row-gap: */
+}
+
+/******************  Entire Page  **********************/
+
+
+#container {
+	max-width: 65em;	/* Bound the width so this main content section doesn't get so wider than a usual paper document would, for the given font-size */
+	margin-inline: auto;	/* Center everything horizontally */
+}
+
+/*****************  Header  ***********************/
+
+#header #topBar {
 	text-align: right;
+	font-size: 66%;
+	margin-top: 0.3rem;
+	margin-right: 0.5rem;
 }
 
-span.buttonContents {
-	vertical-align: middle;
-	color: #FFFFFF;
-	margin-right: 10px;
+#header #mainTitle {
+  display: flex;
+  justify-content: center;
+	margin: 1.7rem 0;
 }
-	
-div#button1 {
+
+#header #mainTitle img {
+	width: min(88vw, 484px);	/* Have the title image fill up 88% of the width of the screen, but never grow wider than its intrinsic pixel width of 484 pixels */
+}
+
+/****************  Menu with buttons and main content  ************************/
+
+#mainBody {
+	display: flex;
+	flex-direction: column;
+}
+
+#mainBody #menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#mainBody #content {
+	padding: 2rem 1.75rem;
+	font-size: max(100%, 14px);	/* Don't let the content ever go below 14px in font-size */
+	/* Fill the entire available width */
+	box-sizing: border-box;
+	width: 100%;
+  container: content / inline-size;  /* so a container-query can be done */
+}
+
+/***************  Menu with buttons  ******************/
+
+#menu .buttonContainer {
+	flex-grow: 1;
+	flex-basis: 0px; /* 0px so the actual contents of each button don't affect the final width of each button */
+}
+
+#menu .buttonBody {
+	height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	color: #FFFFFF;
+}
+
+/* Have the currently selected menu option be a little bit taller to visually offset it */
+#menu .buttonBody.selected {
+	padding-block: 0.15rem;
+}
+
+/* Allow 4 different distinct but harmonious button colors */
+#menu .buttonBody#button1 {
 	background-color: #003366;
 }
-
-div#button2 {
+#menu .buttonBody#button2 {
 	background-color: #001144;
 }
-
-div#button3 {
+#menu .buttonBody#button3 {
 	background-color: #446677;
 }
-
-div#button4 {
+#menu .buttonBody#button4 {
 	background-color: #114466;
 }
 
-img.largeArrow {
-	width: 10px;
-	height: 10px;
-	position: relative;
-	right: 10px;
+#menu img.largeArrow {
+	width: 0.70rem;
+	height: 0.70rem;
+	display: inline;
+}
+
+/************************* Overrides for wider screens ******************************/
+
+@media (width > 900px) {
+
+	/**********
+		On wider screens we make these changes to take advantage of this extra width:
+			1. There's now some left-right padding around the entire content on the page
+			2. The main title logo is now left aligned, and spaced a bit differently
+			3. The menu becomes a stack of buttons that appears to the left of the content
+
+		and then all subsequent changes are due to one of those above change
+	***********/
+
+	/**********
+		1. There's now some left-right padding around the entire content on the page
+	***********/
+	#container {
+		padding-inline: 1.5em;
+	}
+
+	/* The topBar is now padded from the extra side of the viewport due to the #container padding above, so no need for custom padding here */
+	#header #topBar {
+		margin-right: 0em;
+	}
+
+	/* Because the content no longer fills the entire width of the screen, but a border around it so it is visually bounded */
+	#content {
+		border: 1px solid;
+	}
+	/* and add some extra padding below everything */
+	#container {
+		padding-bottom: 10vh;
+	}
+
+
+	/**********
+		2. The main title logo is now left aligned, and spaced a bit differently
+	***********/
+	#header #mainTitle {
+		justify-content: left;
+		margin-bottom: 2.8em;	/* Push down the content a bit more, for a more relaxed visual look */
+	}
+
+	/* Move the main image title just 1 pixel to the left, so it doesn't look so perfectly aligned */
+	#header img#mainTitleImage {
+		position: relative;
+		left: -1px;
+	}
+
+
+	/**********
+		3. The menu becomes a stack of buttons that appears to the left of the content
+	***********/
+	#mainBody {
+		flex-direction: row;
+		gap: 0.6em;
+	}
+	
+	#mainBody #menu {
+		flex-shrink: 0;
+		width: 11em;
+		display: flex;
+		flex-direction: column;
+		align-items: normal;
+		gap: 0.38em;
+	}
+
+	#menu .buttonBody {
+		/* Align the button text to the right, with some padding there */
+		justify-content: right;
+		padding-right: 0.8em;
+
+		/* Make the buttons a bit taller when they're in a vertical stack */
+		height: 3.5em;
+	}
+	
+	#menu .buttonContainer {
+		/* buttons should not grow or shrink */
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+
+	/* Instead of the currently selected button standing out by being a little bit 'taller' ... */
+	#menu .buttonBody.selected {
+		padding-block: 0;
+	}
+	/* ... make it so the currently selected button has a slightly larger font size, */
+	#menu .buttonBody.selected .buttonContents,
+	/* and have the non-selected buttons change in the same way when the user hovers over them */
+	#menu a.increaseTextSize:hover .buttonBody.notSelected .buttonContents {
+		font-size: 130%;
+	}
 }
