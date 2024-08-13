@@ -36,8 +36,10 @@ a {
 }
 
 /* Links/anchors that wish to visually respond to the user hovering over them should have the class 'boldMe' */
-a.boldMe:hover {
-	color: #000000;
+@media (any-hover: hover) {
+	a.boldMe:hover {
+		color: #000000;
+	}
 }
 
 /* Remove or replace some standard <ul> and <li> styling on all <ul> and <li> elements */
@@ -234,6 +236,7 @@ li {
 	#menu .buttonBody.selected {
 		padding-block: 0;
 	}
+	
 	/* ... make it so the currently selected button has a slightly larger font size, */
 	#menu .buttonBody.selected .buttonContents,
 	/* and have the non-selected buttons change in the same way when the user hovers over them */

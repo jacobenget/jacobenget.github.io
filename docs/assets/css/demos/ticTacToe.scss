@@ -29,11 +29,13 @@ table.board {
 }
 
 /* A player hovering over an available spot on the board should result in that spot being slightly colored with the player's color */
-table.board td.tictactoe-openForPlayerX:hover {
-  background-color: lighten($color-for-player-x, $player-x-lighten-factor);
-}
-table.board td.tictactoe-openForPlayerO:hover {
-  background-color: lighten($color-for-player-o, $player-o-lighten-factor);
+@media (any-hover: hover) {
+  table.board td.tictactoe-openForPlayerX:hover {
+    background-color: lighten($color-for-player-x, $player-x-lighten-factor);
+  }
+  table.board td.tictactoe-openForPlayerO:hover {
+    background-color: lighten($color-for-player-o, $player-o-lighten-factor);
+  }
 }
 
 /* If the game finishes with a player winning then we want to highlight, with the player's color, the spots contributing to their win */
