@@ -1,6 +1,6 @@
 title: Jacob Enget's Personal Website
 collections:
-  demos:
+  projects:
     output: true
 plugins:
   - jekyll-redirect-from # Enables the use of this plugin, https://github.com/jekyll/jekyll-redirect-from, which enables the Jekyll 'redirect_from' feature

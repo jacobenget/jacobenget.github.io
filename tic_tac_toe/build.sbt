@@ -24,7 +24,7 @@ def copyAllFilesInDirectory(sourceDir: Path, destDir: Path, log: sbt.util.Logger
   }
 }
 
-val websiteTargetDirectory: Path = Paths.get("../docs/assets/js/demos/ticTacToe")
+val websiteTargetDirectory: Path = Paths.get("../docs/assets/js/projects/ticTacToe")
 
 val fastLinkJSAndCopy = taskKey[Unit](s"Compile, fast link, and then copy the output to the website's target directory: $websiteTargetDirectory")
 val fullLinkJSAndCopy = taskKey[Unit](s"Compile, full link, and then copy the output to the website's target directory: $websiteTargetDirectory")

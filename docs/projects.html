@@ -1,0 +1,19 @@
+---
+title: projects
+layout: default
+associated_top_level_page: projects
+---
+
+<div id="thumbnailTable">
+  <div class="projects">
+    {% for project in site.projects %}
+    <a href="{{ project.url }}">
+      <div class="projectRow iconicHeader">
+        <div class="title">{{ project.title }}</div>
+        <div class="description">{{ project.description }}</div>
+        <img alt="" class="thumbnail" src="/assets/images/projects/{{ project.project_id }}/thumbnail.jpg"/>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>

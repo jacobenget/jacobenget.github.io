@@ -1,9 +1,9 @@
 ---
 title: doom asset viewer
 description: online doom WAD reader
-demo_id: doomWadReader
-layout: demo
-associated_top_level_page: demos
+project_id: doomWadReader
+layout: project
+associated_top_level_page: projects
 ---
 
 <!-- using jquery(UI) to make Drag-n-Drop handling easier to get right -->
@@ -28,26 +28,26 @@ Note that this page currently only works for WAD files from Doom 1 (specifically
     <li><div><a draggable="true" href="/assets/files/doom_wads/alientc1.zip">Aliens Total Conversion</a></div></li>
     <li><div><a draggable="true" href="/assets/files/doom_wads/ldsprts.zip">Lego Sprites</a></div></li>
 </ul>
-<script src="/assets/js/demos/doomWadReader/jszip.js"></script>
-<script src="/assets/js/demos/doomWadReader/setup_ui_interactions.js" type="text/javascript"></script>
+<script src="/assets/js/projects/doomWadReader/jszip.js"></script>
+<script src="/assets/js/projects/doomWadReader/setup_ui_interactions.js" type="text/javascript"></script>
 <br/>
 <div id="dropWadHere">
     <div class="inner">
         <div class="contents"> <!-- This div element is entirely swapped out in during the processing of a WAD file, after drag-n-drop completes -->
-            <img id="dropIcon" class="icon" src="/assets/images/demos/doomWadReader/arrow-down-a.png"/>
+            <img id="dropIcon" class="icon" src="/assets/images/projects/doomWadReader/arrow-down-a.png"/>
             <div id="label">Drag and drop a link to a WAD file here</div>
         </div>
     </div>
 </div>
 <script type="module">
-    import { Main } from "/assets/js/demos/doomWadReader/main.js";
+    import { Main } from "/assets/js/projects/doomWadReader/main.js";
 
     $(document).ready(function() {
         $( "#dropWadHere" )
         .on("dragenter", onDragEnter)
         .on("dragover", onDragOver)
         .on("dragleave", onDragLeave)
-        .on("drop", onDrop("/assets/images/demos/doomWadReader/Doomguy-movinganim.gif", function (wadInbuffer) { return Main.parseDoomWadData(wadInbuffer); }));
+        .on("drop", onDrop("/assets/images/projects/doomWadReader/Doomguy-movinganim.gif", function (wadInbuffer) { return Main.parseDoomWadData(wadInbuffer); }));
     });
 </script>
 

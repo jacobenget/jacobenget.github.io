@@ -2,14 +2,14 @@
 layout: default
 ---
 
-<div id="demoDetailWrapper">
-  <div class="navigationBar" id="demoTopBar">
+<div id="projectDetailWrapper">
+  <div class="navigationBar" id="projectTopBar">
     <span class="previousLink">
       {% if page.previous %}
       <a class="boldMe" href={{ page.previous.url }}>&lt; previous</a>
       {% endif %}
     </span>
-    <span class="demosHomeLink"><a class="boldMe" href="/demos">demos home</a></span>
+    <span class="projectsHomeLink"><a class="boldMe" href="/projects">projects home</a></span>
     <span class="nextLink">
       {% if page.next %}
       <a class="boldMe" href={{ page.next.url }}>next &gt;</a>
@@ -18,23 +18,23 @@ layout: default
   </div>
 
 
-  <div class="demoRow iconicHeader">
+  <div class="projectRow iconicHeader">
     <div class="title">{{ page.title }}</div>
     <div class="description">{{ page.description }}</div>
-    <img alt="" class="thumbnail" src="/assets/images/demos/{{ page.demo_id }}/thumbnail.jpg"/>
+    <img alt="" class="thumbnail" src="/assets/images/projects/{{ page.project_id }}/thumbnail.jpg"/>
   </div>
   <br/>
-  <div id="demoIncludeContents">
+  <div id="projectIncludeContents">
     {{ content }}
   </div>
 
-  <div class="navigationBar" id="demoBottomBar">
+  <div class="navigationBar" id="projectBottomBar">
     <span class="previousLink">
       {% if page.previous %}
       <a class="boldMe" href={{ page.previous.url }}>&lt; previous</a>
       {% endif %}
     </span>
-    <span class="demosHomeLink"><a class="boldMe" href="/demos">demos home</a></span>
+    <span class="projectsHomeLink"><a class="boldMe" href="/projects">projects home</a></span>
     <span class="nextLink">
       {% if page.next %}
       <a class="boldMe" href={{ page.next.url }}>next &gt;</a>

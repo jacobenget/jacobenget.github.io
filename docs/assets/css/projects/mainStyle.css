@@ -1,6 +1,6 @@
-/**************** From demos homepage ****************/
+/**************** From projects homepage ****************/
 
-.demos {
+.projects {
 	display: flex;
 	flex-direction: column;
 	gap: 0.8rem;
@@ -25,114 +25,114 @@
 	font-weight: normal;
 }
 
-.demoRow.iconicHeader {
+.projectRow.iconicHeader {
 	display: flex;
 }
 	
-.demoRow.iconicHeader .title {
+.projectRow.iconicHeader .title {
 	font-size: 100%;	/* Remove bold-ness usually applied to the title */
 }
 	
-.demoRow.iconicHeader .thumbnail {
+.projectRow.iconicHeader .thumbnail {
 	order: -1;	/* Move the thumbnail to the beginning of the flex grid */
 	width: 30%;
 	padding-right: 2em;
 }
 		
-.demoRow.iconicHeader img.thumbnail {
+.projectRow.iconicHeader img.thumbnail {
 	aspect-ratio: 3;
 }
 
 
-/**************** From page showing a single demo ****************/
+/**************** From page showing a single project ****************/
 
 /* Inherited behavior is that anchor tags do NOT have underlines
  but we'd like to change that here so all anchors in the contents
- of a demo have underlines */
-#demoIncludeContents a {
+ of a project have underlines */
+#projectIncludeContents a {
 	text-decoration: underline;
 }
 
-#demoIncludeContents {
+#projectIncludeContents {
 	padding-bottom: 2em;
 }
 
-#demoDetailWrapper .navigationBar {
+#projectDetailWrapper .navigationBar {
 	font-size: smaller;
 	display: flex;
 	flex-direction: row;
 }
 
-#demoDetailWrapper .navigationBar .previousLink {
+#projectDetailWrapper .navigationBar .previousLink {
 	flex-grow: 1;
 	flex-basis: 0;	/* So the actual width this eventually takes up isn't dependent upon its natural/auto width */
 }
 
 @media (width <= 900px) {
 	/* On not not-so-wide displays the main navigation menu is just at the top of the page,
-	 so a user at the top of a demo page always has a button close by to press to
-	 get back to the demos home, so this custom button to do just that at the top
-	 of each demo page can just be hidden */
-	#demoDetailWrapper #demoTopBar .demosHomeLink {
+	 so a user at the top of a project page always has a button close by to press to
+	 get back to the projects home, so this custom button to do just that at the top
+	 of each project page can just be hidden */
+	#projectDetailWrapper #projectTopBar .projectsHomeLink {
 		display: none;
 	}
 }
 
-#demoDetailWrapper .navigationBar .nextLink {
+#projectDetailWrapper .navigationBar .nextLink {
 	flex-grow: 1;
 	flex-basis: 0;	/* So the actual width this eventually takes up isn't dependent upon its natural/auto width */
 	text-align: right;
 }
 
-#demoDetailWrapper #demoTopBar {
+#projectDetailWrapper #projectTopBar {
 	margin-bottom: 2rem;
 }
 
-#demoDetailWrapper #demoBottomBar {
+#projectDetailWrapper #projectBottomBar {
 	margin-top: 1rem;
 }
 
 
 /*
 	NOTE: using :where here in order to NOT introduce a more specific selector that would indicentally override 
-	the attempt below to restyle a .demoRow.iconicHeader based on the width of its container
+	the attempt below to restyle a .projectRow.iconicHeader based on the width of its container
 	*/
-:where(#demoDetailWrapper) .demoRow.iconicHeader .title {
+:where(#projectDetailWrapper) .projectRow.iconicHeader .title {
 	font-size: 130%;
 }
-:where(#demoDetailWrapper) .demoRow.iconicHeader .thumbnail {
+:where(#projectDetailWrapper) .projectRow.iconicHeader .thumbnail {
 	width: 25%;
 	padding-right: 1.5em;
 }
 
 
 /*
-	When the container listing the demos or a single demo isn't particularly wide,
-	change the row for each demo so the thumbnail fully expands to fill the available width,
+	When the container listing the projects or a single project isn't particularly wide,
+	change the row for each project so the thumbnail fully expands to fill the available width,
 	the title appears above the thumbnail, and the description appears below the thumbnail
 	*/
 @container content (width < 49em) {
-	.demos {
+	.projects {
 		gap: 1.6rem;
 	}
 
-	.demoRow.iconicHeader {
+	.projectRow.iconicHeader {
 		flex-direction: column;
 		align-items: normal;
 	}
 	
-	.demoRow.iconicHeader .title {
+	.projectRow.iconicHeader .title {
 		font-size: 130%;
 		border-right: none;
 	}
 	
-	.demoRow.iconicHeader .thumbnail {
+	.projectRow.iconicHeader .thumbnail {
 		order: 0;	/* Move the thumbnail back to its initial spot in the order */
 		width: 100%;
 	}
 	
-	.demoRow.iconicHeader .description {
-		order: 1;	/* Move the demo decription to the end of the flex grid */
+	.projectRow.iconicHeader .description {
+		order: 1;	/* Move the project decription to the end of the flex grid */
 		text-align: right;
 	}
 }
@@ -140,7 +140,7 @@
 
 
 /****************************************************************/
-/**************** Classes used by a specific demo ***************/
+/**************** Classes used by a specific project ***************/
 /****************************************************************/
 
 
@@ -208,7 +208,7 @@
 
 /************* 3dmaze Specific ****************/
 
-/* Center the main image in this demo */
+/* Center the main image in this project */
 .main3dMazeImage {
 	text-align: center;
 }
