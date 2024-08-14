@@ -53,7 +53,7 @@ ul ul {
 	padding-left: 2em;	/* indent subrows a bit more than usual, to give them more space visually */
 }
 
-li {
+ul > li {
 	background-image: url(../images/itemDot.gif);
 	background-repeat: no-repeat;
 	background-position: 0.2em .45em; /* places the dot in a visually nice place */
