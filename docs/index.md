@@ -28,7 +28,7 @@ Here is a high-level overview of the trajectory of my career, hoping to paint a 
 
 In contrast, you can check out my [resume](/resume) for gritty details on accomplishments of mine that I won't address here.
 
-**Prelude:** *An Undercurrent of Math* -
+### Prelude: *An Undercurrent of Math*
 My first academic love was math.
 Fun with numbers and computation drove my personal interests from a very young age[^1], and before I even knew what was what I had a math degree...
 shortly after, I realized I wanted a career doing something more social and emotionally creative.
@@ -36,24 +36,24 @@ shortly after, I realized I wanted a career doing something more social and emot
 So I put down the Rubik's cube[^2] and followed my interests in animation and video games to earn a degree in computer science.
 Though to this day my mathematical appreciation drives my love for abstract foundations, beauty in symmetry, and solutions where math makes hard things easy!
 
-**Act 1:** *Video Games* -
+### Act 1: *Video Games* - 7 years
 Shortly after obtaining my second degree, and with much excitement, I joined [id Software](http://www.idsoftware.com/) to work on their suite of tools for building video games.
 My efforts contributed to the launch of both [*Rage*](https://en.wikipedia.org/wiki/Rage_(video_game)) and [*Doom*](https://en.wikipedia.org/wiki/Doom_(2016_video_game)).
 Later I joined the folks at [Havok](http://www.havok.com/) to build a platform for content creation tools from scratch.
 
-Through 7 years of working in the video game industry I got a first-class lesson on the impact of both performance and software usability on a final product.
+Through my years working in the video game industry I got a first-class lesson on the impact of both performance and software usability on a final product.
 I also learned how much I love helping others succeed!
 
-**Act 2:** *Expanding My Horizons* -
+### Act 2: *Expanding My Horizons* - 7 years
 Feeling like I was missing something[^3], I left the video game industry to explore the great wide open of the tech world.
 
 I intentionally steered my career to work on a myriad of projects, getting experience in frontend, backend, mobile, embedded development, and enjoying a 4 year groove in data engineering.
 I worked both at start-ups and at consulting gigs, experienced the pleasure of customer-facing roles, and developed into a leader as I found particular joy working on big data technologies.
 
-Over those 7 years my perspective and confidence grew, as did my understanding of what makes teams succeed: responsive listening, collaboration, and taking the time to understand a problem fully before committing to a solution.
+Over those years my perspective and confidence grew, as did my understanding of what makes teams succeed: responsive listening, collaboration, and taking the time to understand a problem fully before committing to a solution.
 And the same passion of mine provided persistent direction: my love for building systems that help others achieve their vision.
 
-**Intermission:** *Touching Grass* - 
+### Intermission: *Touching Grass* - 2 years
 We all learned a lot from COVID, and I was left with a wide-eyed perspective on life.
 When I saw before me the option to spend time with my children while they're small I couldn't pass it up, so I voluntarily stepped out of my job and into a childcare role within my family.
 
