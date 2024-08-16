@@ -24,9 +24,7 @@ I'm passionate about closing that gap by building software that is intuitive, re
 
 ## My Career So Far
 
-I hope this high-level overview paints a picture of where I’m coming from and what my past experience means to me.
-
-In contrast, you can check out my [resume](/resume) for gritty details on accomplishments of mine that I won't address here.
+I hope this high-level overview paints a picture of where I’m coming from and what my past experience means to me. In contrast, you can check out my [resume](/resume) for gritty details on accomplishments of mine that I won't address here.
 
 ### Prelude: *An Undercurrent of Math*
 My first academic love was math.
