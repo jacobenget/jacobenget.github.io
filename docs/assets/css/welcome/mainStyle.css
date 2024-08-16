@@ -1,15 +1,21 @@
 /* Inherited behavoir is that anchor tags do NOT have underlines
  but we'd like to change that here so all anchors in the about me section
 have underlines */
-div#aboutMe a {
+#aboutMe a,
+#aboutMe + * a {
 	text-decoration: underline;
 }
 
-/* Make it so the first paragraph doesn't inherit any top-margin */
-#aboutMe > p {
-  margin-block-start: 0;
+/* Make it so the first header doesn't have so big a margin, because its container also has a margin above */
+#aboutMe > h1:first-child {
+  margin-block-start: 0.25em;
 }
 
-#aboutMe > p + p {
-  margin-block-start: inherit;
+/* Stop footnote superscripts from changing the line height, but also display them in a way that they still look like footnotes */
+#aboutMe sup {
+  vertical-align: top;  /* instead of the default 'super' */
+  font-size: 0.8em; /* instead of the default 'smaller', which can be a bit bigger than this */
+  /* move things up a bit vertically, but not so much that they collide with the line above */
+  position: relative;
+  top: -0.3em;
 }
