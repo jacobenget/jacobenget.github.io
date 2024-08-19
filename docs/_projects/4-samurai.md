@@ -6,14 +6,11 @@ layout: project
 associated_top_level_page: projects
 ---
 
-<p>
 This is a flash game I created with another student as our final project for a class in 2D animation.
-</p>
-<p>
+
 From the beginning, we had big ambitions.
 The class focused on animation, but we wanted to create a piece that was highly interactive as well.
 Our enthusiasm helped us cover the extra ground, and we felt that it all came together into something that was fun to play.
-</p>
 
 <div id="samuraiFlashContainer"></div>
 
@@ -41,18 +38,14 @@ Our enthusiasm helped us cover the extra ground, and we felt that it all came to
     <div>Use 'c' for a fast attack</div>
     <div>Use 'z' for a strong attack</div>
 </div>
-<p>
+
 My partner and I took complementary roles on this project.  He handled most of the artistic side by designing the introduction animation and creating background art pieces for the game.  I tackled the technical aspects of the project by:
-</p>
-<ul>
-    <li>Building a 2D game engine in ActionScript.  This engine handled:</li>
-    <ul>
-        <li>Screen Scrolling: adding and removing background objects as the samurai moves throughout the stage</li>
-        <li>User Interaction Components: user input, the timer, and the kill count</li>
-        <li>Collision Detection and Response</li>
-        <li>Gravity</li>
-        <li>Building the Environment: based on data read in</li>
-    </ul>
-    <li>Programming the zombies so they respond to the samurai's movements and his attacks.</li>
-    <li>Animating the samurai and the zombies and writing code to handle the animations according to the state of the game.</li>
-</ul>
+
+- Building a 2D game engine in ActionScript.  This engine handled:
+   - Screen Scrolling: adding and removing background objects as the samurai moves throughout the stage
+   - User Interaction Components: user input, the timer, and the kill count
+   - Collision Detection and Response
+   - Gravity
+   - Building the Environment: based on data read in
+- Programming the zombies so they respond to the samurai's movements and his attacks.
+- Animating the samurai and the zombies and writing code to handle the animations according to the state of the game.
