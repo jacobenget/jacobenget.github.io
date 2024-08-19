@@ -10,12 +10,3 @@ have underlines */
 #aboutMe > h1:first-child {
   margin-block-start: 0.25em;
 }
-
-/* Stop footnote superscripts from changing the line height, but also display them in a way that they still look like footnotes */
-#aboutMe sup {
-  vertical-align: top;  /* instead of the default 'super' */
-  font-size: 0.8em; /* instead of the default 'smaller', which can be a bit bigger than this */
-  /* move things up a bit vertically, but not so much that they collide with the line above */
-  position: relative;
-  top: -0.3em;
-}

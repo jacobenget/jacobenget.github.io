@@ -61,6 +61,15 @@ ul > li {
 	margin-top: 0.25em; /* put vertical spacing between items TODO: user row-gap: */
 }
 
+/* Stop footnote superscripts from changing the line height, but also display them in a way that they still look like footnotes */
+sup[role=doc-noteref] {
+  vertical-align: top;  /* instead of the default 'super' */
+  font-size: 0.8em; /* instead of the default 'smaller', which can be a bit bigger than this */
+  /* move things up a bit vertically, but not so much that they collide with the line above */
+  position: relative;
+  top: -0.3em;
+}
+
 /******************  Entire Page  **********************/
 
 
