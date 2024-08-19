@@ -6,7 +6,7 @@ layout: project
 associated_top_level_page: projects
 ---
 
-In 2012, after fighting with Win32/MFC for far too long while working on tools at id Software, I was really excited about <a href="">Qt</a>, Nokia's cross-platform application framework, and decided to revisit an old project of mine.
+In 2012, after fighting with Win32/MFC for far too long while working on tools at id Software, I was really excited about <a class="boldMe" href="https://en.wikipedia.org/wiki/Qt_(software)">Qt</a>, the cross-platform application framework, and decided to revisit an old project of mine.
 
 The project stemmed from a computer graphics assignment where the goal was to create two C++/OpenGL programs from scratch: one that could display a model of a 3D maze, and another that would let the user walk around in the same 3D model.
 I also added the ability to author the maze in the app visually, collision detection and reaction, and the ability to jump and adjust the field of view while in first-person view.
