@@ -24,7 +24,7 @@ I'm passionate about closing that gap by building software that is intuitive, re
 
 ## My Career So Far
 
-I hope this high-level overview paints a picture of where I’m coming from and what my past experience means to me. In contrast, you can check out my [resume](/resume) for gritty details on accomplishments of mine that I won't address here.
+I hope this high-level overview paints a picture of where I’m coming from and what my past experience means to me. In contrast, my [resume](/resume) details previous accomplishments of mine that I won't directly address here.
 
 ### Prelude: *An Undercurrent of Math*
 My first academic love was math.
@@ -68,8 +68,9 @@ This sabbatical, this selfish gift of time, allowed for investment in myself, my
 I'm excited to step out of my sabbatical and into an engaging role!
 
 I dream of being in a technical position, surrounded by curious and empowered folks, doing work that enables users to create amazing things.
+I'm confident that in whatever work I do next I'll make a strong positive impact, as I've done in the past[^9]. 
 
-My optimal arrangement doesn't require any specific industry, company structure, or technology stack[^4].
+My optimal arrangement doesn't require any specific industry, company structure, or technology stack[^4], as I have been consistently successful at adopting new tools to get the job done.
 I'm located in Minneapolis, MN, and don't fancy moving but would be comfortable with remote work.
 
 **Areas Where I Have a Strong Interest**
@@ -89,10 +90,11 @@ Thanks again for taking the time to learn more about me. I hope you enjoy lookin
 [^1]: Fun fact: I was a [two](https://www.edweek.org/education/news-in-brief/1999/05)-[time](https://web.archive.org/web/20240814230250/https://www.orlandosentinel.com/2000/03/19/5005-digits-of-pi-are-part-of-students-memories/) champion of the 𝜋 memorization contest at my high school.
 [^2]: Fun fact: I'd love to talk your ear off about Rubik's cubes: solving them for speed, solving them while blindfolded, inventing your own solution algorithm from scratch!
 [^3]: At this time the video game industry felt siloed. Often I found myself reading about advancements happening elsewhere (e.g. the rise of React and similar front-end technologies) and thinking "They're addressing many of the same problems we're struggling with! Why aren't we paying more attention to solutions invented elsewhere?!"
-[^4]: I do, however, really enjoy statically-typed programming languages, due to my preference for doing work that produces systems for others to confidently build upon.
+[^4]: I do, however, really enjoy statically-typed programming languages, due to my preference for producing systems that others can confidently build upon.
 [^5]: But done better, by pairing it with text-based programming, leveraging the usability sweet spots of both approaches (at least this is my dream...when I have a working prototype of this I'll be sharing it)
 [^6]: [End-User Programming](https://www.inkandswitch.com/end-user-programming/): I'm thrilled I finally learned the phrase for this concept; it encompasses so many of my interests!
 [^7]: I believe WebAssembly has a shot at really changing how we build software, and I'm inspired by how well designed and led this effort seems to be. 
 [^8]: Admittedly, this list is a bit subjective, and somewhat US-specific.
+[^9]: Details of significant accomplishments are in my [resume](/resume).
 
 </div>
