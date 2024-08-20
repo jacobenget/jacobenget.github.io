@@ -37,13 +37,13 @@ Though to this day my mathematical appreciation drives my love for abstract foun
 ### Act 1: *Video Games* - 7 years
 Shortly after obtaining my second degree, and with much excitement, I joined [id Software](http://www.idsoftware.com/) to work on their suite of tools for building video games.
 My efforts contributed to the launch of both [*Rage*](https://en.wikipedia.org/wiki/Rage_(video_game)) and [*Doom*](https://en.wikipedia.org/wiki/Doom_(2016_video_game)).
-Later I joined the folks at [Havok](http://www.havok.com/) to build from scratch a platform for content creation tools.
+Later I joined the folks at [Havok](http://www.havok.com/), in Ireland, to build from scratch a platform for content creation tools.
 
 Through my years working in the video game industry I got a first-class lesson on the impact of both performance and software usability on a final product.
 I also learned how much I love helping others succeed!
 
 ### Act 2: *Expanding My Horizons* - 7 years
-Feeling like I was missing something[^3], I left the video game industry to explore the great wide open of the tech world.
+Feeling like I was missing something[^3], I left the video game industry and headed back to the US to explore the great wide open of the tech world.
 
 I intentionally steered my career to work on a myriad of projects, getting experience in frontend, backend, mobile, embedded development, and enjoying a 4 year groove in data engineering.
 I worked both at start-ups and at consulting gigs, experienced the pleasure of customer-facing roles, and developed into a leader as I found particular joy working on big data technologies.
