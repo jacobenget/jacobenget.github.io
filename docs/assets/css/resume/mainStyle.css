@@ -83,21 +83,6 @@ div.resumeSectionContent {
 }
 
 
-/***************** Strengths section *****************************/
-
-#strengthsHeader {
-	margin-top: 0.5rem;
-	text-align: center;
-}
-
-#strengthsList {
-	display: grid;
-  grid-template-columns: repeat(2, auto);
-	justify-content: center;
-	column-gap: 1em;
-}
-
-
 /***************** Technical skills *****************************/
 
 div#technicalSkillsText {
