@@ -35,7 +35,7 @@ So I put down the Rubik's cube[^2] and followed my interests in animation and vi
 Though to this day my mathematical appreciation drives my love for abstract foundations, beauty in symmetry, and solutions where math makes hard things easy!
 
 ### Act 1: *Video Games* - 7 years
-Shortly after obtaining my second degree, and with much excitement, I joined [id Software](http://www.idsoftware.com/) to work on their suite of tools for building video games.
+Shortly after obtaining my second degree I joined [id Software](http://www.idsoftware.com/) to work on their suite of tools for building video games. I couldn't have been more excited!
 My efforts contributed to the launch of both [*Rage*](https://en.wikipedia.org/wiki/Rage_(video_game)) and [*Doom*](https://en.wikipedia.org/wiki/Doom_(2016_video_game)).
 Later I joined the folks at [Havok](http://www.havok.com/), in Ireland, to build from scratch a platform for content creation tools.
 
@@ -43,12 +43,17 @@ Through my years working in the video game industry I got a first-class lesson o
 I also learned how much I love helping others succeed!
 
 ### Act 2: *Expanding My Horizons* - 7 years
-Feeling like I was missing something[^3], I left the video game industry and headed back to the US to explore the great wide open of the tech world.
+Around this time my wife and I had our first child, making it more painful to live overseas and away from extended family. So we made the hard decision to move back to our corner of the US.
 
-I intentionally steered my career to work on a myriad of projects, getting experience in frontend, backend, mobile, embedded development, and enjoying a 4 year groove in data engineering.
-I worked both at start-ups and at consulting gigs, experienced the pleasure of customer-facing roles, and developed into a leader as I found particular joy working on big data technologies.
+Minnesota was not home to many video game companies though! That, along with feeling like I was missing something by staying in the video game industry[^3], led me to explore the great wide open of the tech world.
 
-Over those years my perspective and confidence grew, as did my understanding of what makes teams succeed: responsive listening, collaboration, and taking the time to understand a problem fully before committing to a solution.
+I first joined a local friend at their startup (SenseAI) and worked on anything and everything that was needed, getting a crash course in backend and mobile development[^10].
+Then I worked at a consultancy (Nerdery) where I experienced the pleasure of customer-facing roles and completed further crash courses in frontend development and big data.
+
+By now I was quite fond of the Scala programming language and excited to try dedicated data engineering work, so I was thrilled to join a local company (Rally Health) building a Spark-based data platform.
+I excelled in this role for a long while, growing into a technical lead and appreciating a team and platform around me that I had a strong hand in building.
+
+In these years my perspective and confidence on how to solve problems with software really grew, as did my understanding of what makes teams succeed: responsive listening, collaboration, and taking the time to understand a problem fully before committing to a solution.
 And the same passion of mine provided persistent direction: my love for building systems that help others achieve their vision.
 
 ### Intermission: *Touching Grass* - 2 years
@@ -57,7 +62,7 @@ When I saw before me the option to spend time with my children while they're sma
 
 I led canoe camping trips to the wilderness of [BWCA](https://www.fs.usda.gov/recarea/superior/recarea/?recid=84168) with extended family, started up a Dungeons & Dragons club at my kids' school, and taught neighborhood kids how to build games in [PICO-8](https://www.lexaloffle.com/pico-8.php).
 
-My joy of programming was with me too as I participated in [The Recurse Center](https://www.recurse.com/) (a programmer's retreat), 
+My joy of programming also never left my side as I participated in [The Recurse Center](https://www.recurse.com/) (a programmer's retreat), 
 became a student of the Rust programming language, 
 and explored the WebAssembly ecosystem: porting [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game)) to WASM to run the game in the browser and building a parser of the WASM binary format.
 
@@ -96,5 +101,6 @@ Thanks again for taking the time to learn more about me. I hope you enjoy lookin
 [^7]: I believe WebAssembly has a shot at really changing how we build software, and I'm inspired by how well designed and led this effort seems to be. 
 [^8]: Admittedly, this list is a bit subjective, and somewhat US-specific.
 [^9]: Details of significant accomplishments are in my [resume](/resume).
+[^10]: And getting a crash course on the choppy waters of startup financing, ugh.
 
 </div>
