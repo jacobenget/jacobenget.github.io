@@ -12,8 +12,7 @@ associated_top_level_page: welcome
 
 I'm Jacob Enget, and I am thrilled you've taken the time to learn more about me!
 
-Here on my website you'll find personal [projects](/projects) of mine, my [resume](/resume), and information on how
-to contact [me](/contact).
+Here on my website you'll find personal [projects](/projects) of mine (a few recent, the rest many years old), my [resume](/resume), and information on how to contact [me](/contact).
 
 # About Me
 
