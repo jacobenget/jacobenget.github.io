@@ -48,12 +48,12 @@ Around this time my wife and I had our first child, making it more painful to li
 Minnesota was not home to many video game companies though! That, along with feeling like I was missing something by staying in the video game industry[^3], led me to explore the great wide open of the tech world.
 
 I first joined a local friend at their startup (SenseAI) and worked on anything and everything that was needed, getting a crash course in backend and mobile development[^10].
-Then I worked at a consultancy (Nerdery) where I experienced the pleasure of customer-facing roles and completed further crash courses in frontend development and big data.
+Then I worked at a consultancy (Nerdery) where I experienced the pleasure of customer-facing roles, drove some projects to success all on my own, and completed further crash courses in frontend development and big data.
 
-By now I was quite fond of the Scala programming language and excited to try dedicated data engineering work, so I was thrilled to join a local company (Rally Health) building a Spark-based data platform.
-I excelled in this role for a long while, growing into a technical lead and appreciating a team and platform around me that I had a strong hand in building.
+By now I was both quite fond of the Scala programming language and excited for dedicated data engineering work, so I was thrilled to join a local company (Rally Health) in building a Spark-based data platform.
+I excelled in this role for a long while, growing further as a technical leader and appreciating a team and platform around me that I had a strong hand in building.
 
-In these years my perspective and confidence on how to solve problems with software really grew, as did my understanding of what makes teams succeed: responsive listening, collaboration, and taking the time to understand a problem fully before committing to a solution.
+My perspective and confidence on how to solve problems with software flourished in these years, as did my understanding of what makes teams succeed: responsive listening, collaboration, and taking the time to understand a problem fully before committing to a solution.
 And the same passion of mine provided persistent direction: my love for building systems that help others achieve their vision.
 
 ### Intermission: *Touching Grass* - 2 years
