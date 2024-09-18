@@ -1,0 +1,584 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      canvas#DoomGame {
+          opacity: 70%;
+      }
+      canvas#DoomGame:focus {
+          opacity: 100%;
+      }
+    </style>
+    <script id="define_retrieveTextAsset" type="text/javascript">
+      function retrieveTextAsset(assetName) {
+        let templateNode = document.querySelector(`template.textAsset[data-assetname="${assetName}"]`);
+        if (templateNode) {
+          return templateNode.content.firstElementChild.textContent;
+        } else {
+          return null;
+        }
+      }
+    </script>
+    <script id="define_determineIWadNeeded" type="text/javascript">
+
+      const IWadNeeded = Object.freeze({
+          Doom1:  Symbol("doom1"),
+          Doom2:  Symbol("doom2"),
+          SelfIsIWad: Symbol("selfIsIWad")
+      });
+
+      // NOTE: All Doom WAD parsing logic appearing here is based on the knowledge packed into the Unofficial Doom Specs,
+      // found here: https://www.gamers.org/dhs/helpdocs/dmsp1666.html
+
+      function determineIWadNeeded(arrayBufferOfWad) {
+
+        // First check if this WAD is an IWAD
+        // The first four bytes of a WAD are either the ASCII string "IWAD" or the ASCII string "PWAD"
+        let decoder = new TextDecoder("utf-8");
+        let wadType = decoder.decode(arrayBufferOfWad.slice(0, 4));
+
+        if (wadType === "IWAD") {
+          // The WAD itself is an IWAD ("Internal WAD") and so doesn't actually need another IWAD to properly run
+          return IWadNeeded.SelfIsIWad;
+        } else if (wadType === "PWAD") {
+          // The WAD is a PWAD ("Patch WAD"), and so needs to be run along with an IWAD
+
+          // It's very likely (maybe a guarantee?) that if the PWAD is going to do anything useful than it must contain data associated with a specific Doom level.
+          // Such level-specific information is contained in a set of lumps that are preceeded by a marker/label lump specific to that level.
+          // In Doom 1 such a level marker lump is named "ExMy", where 'x' is the episode number (1-3) and 'y' is the  mission number (1-9).
+          // In Doom 2 such a level marker lump is named "MAPxx", where 'xx' is the level number (01-32).
+          //
+          // This means that if a WAD contains any lumps that have a name that matches the pattern for a level marker for Doom 1,
+          // then the WAD is very likely intended to be used with a Doom 1 IWAD.
+          // Otherwise, we'll assume the WAD is intended to be used with a Doom 2 IWAD. 
+          let lumpNames = getLumpNames(arrayBufferOfWad);
+          let doom1LevelNameRegex = /^E\dM\d$/
+          let lumpsForADoom1Level = lumpNames.filter((lumpName) => doom1LevelNameRegex.test(lumpName));
+          return (lumpsForADoom1Level.length > 0) ? IWadNeeded.Doom1 : IWadNeeded.Doom2;
+        } else {
+          throw new Error("First four bytes of WAD were neither 'IWAD' nor 'PWAD'");
+        }
+      }
+
+      function getLumpNames(arrayBufferOfWad) {
+        let dataView = new DataView(arrayBufferOfWad)
+        let numberOfLumps = dataView.getInt32(4, true);
+        let offsetOfDirectory = dataView.getInt32(8, true);
+
+        let lumpNames = [];
+
+        let decoder = new TextDecoder("utf-8");
+
+        for (let i = 0; i < numberOfLumps; i++) {
+          // Each directory entry is 16 bytes long
+          let offsetForThisEntry = offsetOfDirectory + (16 * i);
+          // Name of the lump starts 8 bytes into the directory entry
+          let offsetForLumpName = offsetForThisEntry + 8;
+
+          let dataViewOfLumpName = new DataView(arrayBufferOfWad.slice(offsetForLumpName, offsetForLumpName + 8));
+          // The lump name is at most 8 characters, but may be less than 8 characters.
+          // In the case that the lump name is less than 8 characters than the lump name is padded with zero values until it is 8 characters long.
+          // Calculate the actual length of the lump name by finding the first zero value in the 8 bytes of the lump name
+          let lengthOfLumpName = 8;
+          for (let j = 0; j < 8; j++) {
+            if (0 === dataViewOfLumpName.getUint8(j)) {
+              lengthOfLumpName = j;
+              break;
+            }
+          }
+          let lumpName = decoder.decode(dataViewOfLumpName.buffer.slice(0, lengthOfLumpName));
+          lumpNames.push(lumpName);
+        }
+
+        return lumpNames;
+      }
+    </script>
+    <script id="define_getDoomKey" type="text/javascript">
+      // Byte values for some of the keys recognized by Doom
+      const doomKeys = Object.freeze({ 
+        KEY_LEFTARROW: 0xac, 
+        KEY_RIGHTARROW: 0xae,
+        KEY_UPARROW: 0xad,
+        KEY_DOWNARROW: 0xaf,
+        KEY_STRAFE_L: 0xa0,
+        KEY_STRAFE_R: 0xa1,
+        KEY_FIRE: 0xa3,
+        KEY_USE: 0xa2,
+        KEY_RSHIFT: (0x80+0x36),
+        KEY_TAB: 9,
+        KEY_ESCAPE: 27,
+        KEY_ENTER: 13,
+        KEY_BACKSPACE: 0x7f,
+      });
+
+      // Note: it's assumed that this Map is one-to-one!
+      // In other words, it's assumed that there are no two JavaScript keys that map to the same Doom Key
+      const doomKeyFromJavascriptKey = new Map([
+        ["ArrowLeft", doomKeys.KEY_LEFTARROW],
+        ["ArrowRight", doomKeys.KEY_RIGHTARROW],
+        ["ArrowUp", doomKeys.KEY_UPARROW],
+        ["ArrowDown", doomKeys.KEY_DOWNARROW],
+        [",", doomKeys.KEY_STRAFE_L],
+        [".", doomKeys.KEY_STRAFE_R],
+        ["Control", doomKeys.KEY_FIRE],
+        [" ", doomKeys.KEY_USE],
+        ["Shift", doomKeys.KEY_RSHIFT],
+        ["Tab", doomKeys.KEY_TAB],
+        ["Escape", doomKeys.KEY_ESCAPE],
+        ["Enter", doomKeys.KEY_ENTER],
+        ["Backspace", doomKeys.KEY_BACKSPACE],
+      ]);
+
+      function getDoomKey(javaScriptKey) {
+        if (doomKeyFromJavascriptKey.has(javaScriptKey)) {
+          return doomKeyFromJavascriptKey.get(javaScriptKey);
+        } else if (javaScriptKey.length == 1) {
+          // TODO: Lower case???
+          return javaScriptKey.charCodeAt(0);
+        } else {
+          return null;
+        }
+      }
+    </script>
+    <script type="text/javascript">
+
+      // Loads Doom with the given WAD(s) and attaches it to the given canvas element
+      // Returns a Promise that resolves to a AbortController
+      async function startDoomGame(canvas, iWadAsUint8Array, optionalPWadAsUint8Array = null) {
+
+        //let { WASI, File, OpenFile, ConsoleStdout, PreopenDirectory } = await import("https://esm.sh/@bjorn3/browser_wasi_shim@0.2.20");
+
+        let pWadProvided = (optionalPWadAsUint8Array !== null);
+
+        /*
+        let args = [];//["bin", "arg1", "arg2"];
+        let env = [];//["FOO=bar"];
+        let fds = [
+            new OpenFile(new File([])), // stdin
+            ConsoleStdout.lineBuffered(msg => console.log(`******[WASI stdout] ${msg}`)), // stdout
+            ConsoleStdout.lineBuffered(msg => console.warn(`******[WASI stderr] ${msg}`)), // stderr
+        ];
+        let wasi = new WASI(args, env, fds);
+        */
+
+        let moduleInstance = null;
+
+
+        function print_args_and_continue(func, functionName) {
+          return function(){
+            let result = func.apply(this, arguments);
+            console.log("Just called       " + functionName + "(", ...arguments, ") => ", result);
+          };
+        }
+
+        let imports = {
+          "gameSaving": {
+            "readSaveGame": /* size_t readSaveGame(int gameSaveId, unsigned char *dataDestination) */ (gameSaveId, dataDestination) => {
+              const saveGameLabel = `doomSaveGame_${gameSaveId}`;
+              const saveGameString = localStorage.getItem(saveGameLabel);
+
+              const saveGameBytes = decodeAsBase64(saveGameString);
+
+              // Write the save game data to the given destination
+              const buffer = new DataView(moduleInstance.exports.memory.buffer);
+              for (let i = 0; i < saveGameBytes.byteLength; i++) {
+                buffer.setUint8(dataDestination + i, saveGameBytes[i]);
+              }
+
+              return saveGameBytes.byteLength;
+            },
+            "sizeOfSaveGame": /* size_t sizeOfSaveGame(int gameSaveId) */ (gameSaveId) => { 
+              const saveGameLabel = `doomSaveGame_${gameSaveId}`;
+              const saveGameString = localStorage.getItem(saveGameLabel);
+              if (saveGameString) {
+                const byteCount = numberOfBytesEncodedAsBase64(saveGameString); // may return `null`
+                return byteCount ? byteCount : 0; // in the case of `null` just return 0 to denote "no valid save game exists with this id"
+              } else {
+                return 0;
+              }
+            },
+            "writeSaveGame": /* size_t writeSaveGame(int gameSaveId, unsigned char *data, size_t length) */ (gameSaveId, dataSource, dataLength) => {
+              const saveGameBytes = new Uint8Array(moduleInstance.exports.memory.buffer, dataSource, dataLength)
+
+              const saveGameString = encodeAsBase64(saveGameBytes);
+
+              const saveGameLabel = `doomSaveGame_${gameSaveId}`;
+              localStorage.setItem(saveGameLabel, saveGameString);
+
+              return dataLength;
+            },
+          },
+          "loading": {
+            "onGameInit": /* void onGameInit(int width, int height) */ (width, height) => {
+              // Set the size of the canvas so its pixels are 1-to-1 to the pixels in the Doom frame buffer
+              canvas.width = width;
+              canvas.height = height;
+            },
+            "getWadsSizes": /* void getWadsSizes(int *numberOfWads, size_t *numberOfTotalBytesInAllWads) -> () */ (numberOfWadsPtr, numberOfTotalBytesPtr) => {
+              const buffer = new DataView(moduleInstance.exports.memory.buffer);
+              buffer.setInt32(numberOfWadsPtr, pWadProvided ? 2 : 1, true);
+              const numberOfTotalBytes = iWadAsUint8Array.byteLength + (pWadProvided ? optionalPWadAsUint8Array.byteLength : 0);
+              buffer.setUint32(numberOfTotalBytesPtr, numberOfTotalBytes, true);
+            },
+            "readDataForAllWads": /* void readDataForAllWads(unsigned char *wadDataDestination, int *byteLengthOfEachWad) -> () */ (wadDataDestination, byteLengthOfEachWad) => {
+              const buffer = new DataView(moduleInstance.exports.memory.buffer);
+              // Can DataView.set be used to set the data in one go?
+              for (let i = 0; i < iWadAsUint8Array.byteLength; i++) {
+                buffer.setUint8(wadDataDestination + i, iWadAsUint8Array[i]);
+              }
+              buffer.setUint32(byteLengthOfEachWad, iWadAsUint8Array.byteLength, true);
+              if (pWadProvided) {
+                for (let i = 0; i < optionalPWadAsUint8Array.byteLength; i++) {
+                  buffer.setUint8(wadDataDestination + iWadAsUint8Array.byteLength + i, optionalPWadAsUint8Array[i]);
+                }
+
+                buffer.setUint32(byteLengthOfEachWad + 4, optionalPWadAsUint8Array.byteLength, true);
+              }
+            },
+          },
+          "runtimeControl": {
+            "getTicksMs": /* uint32_t getTicksMs() */ () => {
+              return performance.now();
+            },
+            "sleepMs": /* void sleepMs(uint32_t ms) */ (ms) => {
+              let currentMs = performance.now();
+              while ((performance.now() - currentMs) < ms) {
+                // just spin
+              }
+            },
+          },
+          "ui": {
+            "drawFrame": /* void drawFrame(uint32_t *screenBuffer) -> () */ (indexOfFrameBuffer) => {
+              let arrayOfPixelComponents = new Uint8Array(
+                moduleInstance.exports.memory.buffer,
+                indexOfFrameBuffer,
+                canvas.width * canvas.height * 4
+              )
+              ctx = canvas.getContext('2d', { willReadFrequently: true });
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+              /*
+              const x = performance.now() % 1000;
+              const minColor = 1 - Math.abs((x / 500) - 1);
+              */
+
+              for (var i = 0; i < (imageData.data.length / 4); i++) {
+                // Canvas pixels have their 8-bit components ordered "RBGA"
+                //
+                // Doom Frame buffer pixels have their 8-bit components ordered "ARBG",
+                // but as a single 32-bit value this is written in 2's complement, so the order is reserved and is actually "GBRA"
+                imageData.data[4*i+2] = arrayOfPixelComponents[4*i+0];  // Green
+                imageData.data[4*i+1] = arrayOfPixelComponents[4*i+1];  // Blue
+                imageData.data[4*i+0] = arrayOfPixelComponents[4*i+2];  // Red
+                imageData.data[4*i+3] = 255;  // Alpha (fully opaque)
+              }
+              ctx.putImageData(imageData, 0, 0);
+              //console.log(` Rendered at ${performance.now()}`);
+            },
+            "setWindowTitle": /* void setWindowTitle(const char *title) -> () */ (title) => {
+              // do nothing!
+            },
+          },
+          "wasi_snapshot_preview1": {
+            "fd_close": (fd) => {
+              // (func (param i32) (result i32)), function should never be called, so safe to return EOF (i.e. error!)
+              return 0;
+            },
+            "fd_fdstat_get": (fd, fdstat_ptr) => {
+
+              const STDIN_FILENO = 0;
+              const STDOUT_FILENO = 1;
+              const STDERR_FILENO = 2;
+
+              if (fd == STDOUT_FILENO || fd == STDERR_FILENO) {
+                const view = new DataView(moduleInstance.exports.memory.buffer)
+                const FILETYPE_CHARACTER_DEVICE = 2;
+                const RIGHTS_FD_WRITE = 1 << 6;
+
+                view.setUint8(fdstat_ptr, FILETYPE_CHARACTER_DEVICE); // fs_filetype; wasi.FILETYPE_CHARACTER_DEVICE, 2
+                // See: https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md#-fdflags-record
+                view.setUint16(fdstat_ptr + 2, 0, true); // fs_flags: 0
+                // See: https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md#-rights-record
+                view.setBigUint64(fdstat_ptr + 8, BigInt(RIGHTS_FD_WRITE), true); // fs_rights_base; wasi.RIGHTS_FD_WRITE, RIGHTS_FD_WRITE = 1 << 6
+                view.setBigUint64(fdstat_ptr + 16, BigInt(0), true); // fs_rights_inheriting: 0
+
+                return 0; // SUCCESS
+              } else {
+                return 8; // ERRNO_BADF
+              }
+
+            }, // (func (param i32 i32) (result i32)) fd_fdstat_get( 1 459752 ) =>  0
+            "fd_seek": (fd, offset, whence, offset_out_ptr) => 58, // NOTSUP error  // (func (param i32 i64 i32 i32) (result i32))
+            "fd_write": (fd, iovs_ptr, iovs_len, nwritten_ptr) => {
+              const STDIN_FILENO = 0;
+              const STDOUT_FILENO = 1;
+              const STDERR_FILENO = 2;
+
+              if (fd == STDOUT_FILENO || fd == STDERR_FILENO) {
+                let write = (fd == STDOUT_FILENO) ? msg => console.log(`******[WASI stdout] ${msg}`) : msg => console.warn(`******[WASI stderr] ${msg}`)
+
+                const view = new DataView(moduleInstance.exports.memory.buffer);
+                const buffer8 = new Uint8Array(moduleInstance.exports.memory.buffer);
+                
+                const ciovecs = [];
+                for (let i = 0; i < iovs_len; i++) {
+                  ciovecs.push({
+                    "buf": view.getUint32(iovs_ptr + 8 * i, true),
+                    "buf_len": view.getUint32(iovs_ptr + 8 * i + 4, true),
+                  });
+                }
+
+                let nwritten = 0;
+                  
+                const dec = new TextDecoder("utf-8", { fatal: false }); // TODO: probably hold onto this as well!
+                let line_buf = "";  // TODO: hold onto this buffer past each call to this function
+
+                for (const ciovec of ciovecs) {
+                  const data = buffer8.slice(ciovec.buf, ciovec.buf + ciovec.buf_len);
+
+                  line_buf += dec.decode(data, { stream: true });
+                  const lines = line_buf.split("\n");
+                  for (const [i, line] of lines.entries()) {
+                    if (i < lines.length - 1) { // if this isn't the last line
+                      write(line);
+                    } else {
+                      // keep hold of the last line (which would be blank if line_buf ended with a newline),
+                      // in case there will be more to write before the next newline
+                      line_buf = line;
+                    }
+                  }
+
+                  nwritten += ciovec.buf_len;
+                }
+
+                view.setUint32(nwritten_ptr, nwritten, true);
+                return 0; // SUCCESS
+              } else {
+                return 8; //ERRNO_BADF
+              }
+            }, // (func (param i32 i32 i32 i32) (result i32))
+            "proc_exit": (exitCode) => {}, // (func (param i32)))  TODO: why isn't this ever called?  Exiting game doesn't result in this called....hmmm
+          },
+        }
+
+        alert("Works??!!");
+
+        return fetch("/assets/files/doom.wasm")
+          .then((response) => response.arrayBuffer())
+          .then((bytes) => WebAssembly.compile(bytes))
+          .then((module) => WebAssembly.instantiate(module, imports).then((instance) => {
+
+            // Create an AbortController that allows the user to 'abort' this Doom game
+            let controller = new AbortController();
+
+            moduleInstance = instance;
+
+            if (moduleInstance.exports._initialize) {
+              instance.exports._initialize();
+            }
+
+            instance.exports.initGame();
+
+            // sign up to call TickDoomGame twice every frame (one frame happens every 35 ms), for good measure
+            let tickIntervalID = setInterval(instance.exports.tickGame, (1000 / 35) / 2);
+
+            controller.signal.addEventListener('abort', function(event) {
+              clearInterval(tickIntervalID);
+            });
+
+            canvas.addEventListener('keydown', function(event) {
+              if (!event.metaKey) {
+                // If the key associated with the event is one that Doom recognizes
+                let associatedDoomKey = getDoomKey(event.key);
+                if (associatedDoomKey !== null) {
+                  event.stopPropagation();
+                  event.preventDefault();
+
+                  instance.exports.reportKeyDown(associatedDoomKey);
+                }
+              }
+            }, {"signal": controller.signal});
+
+            canvas.addEventListener('keyup', function(event) {
+              if (!event.metaKey) {
+                // If the key associated with the event is one that Doom recognizes
+                let associatedDoomKey = getDoomKey(event.key);
+                if (associatedDoomKey !== null) {
+                  event.stopPropagation();
+                  event.preventDefault();
+
+                  instance.exports.reportKeyUp(associatedDoomKey);
+                }
+              }
+            }, {"signal": controller.signal});
+
+            return controller;
+          }));
+      }
+
+      // Input: string, which is a Base64-encoding of some sequence of bytes
+      // Output: Uint8Array
+      function decodeAsBase64(base64EncodedString) {
+        return Uint8Array.from(atob(base64EncodedString), (m) => m.codePointAt(0));
+      }
+
+      // Input: Uint8Array
+      // Output: string, which is a Base64-encoding of the input
+      function encodeAsBase64(arrayOfBytes) {
+        return btoa(String.fromCharCode.apply(null, arrayOfBytes));
+      }
+
+      // Input: string, which is a Base64-encoding of some sequence of bytes
+      // Output: number, which is the number of bytes in the encoded data
+      function numberOfBytesEncodedAsBase64(base64EncodedString) {
+        // We're going to assume that the standard algorithm for Base64 encoding was used,
+        // which is detailed in section 4 of RFC 4648, here: https://datatracker.ietf.org/doc/html/rfc4648#section-4
+        // Specifically, we're going to assume that the result from the encoding process was padded with instances of '=' to a multiple of 4 characters.
+        const numberOfQuartets = base64EncodedString.length / 4;
+
+        if (Number.isInteger(numberOfQuartets)) {
+          let numberOfBytes = 3 * numberOfQuartets;
+
+          // Account for the presence of padding
+          if (base64EncodedString.endsWith("==")) {
+            numberOfBytes -= 2;
+          } else if (base64EncodedString.endsWith("=")) {
+            numberOfBytes -= 1;
+          }
+
+          return numberOfBytes;
+        } else {
+          // string length isn't a multiple of 4, so we're going to just assume that it isn't actually a Base64 encoding of some data,
+          // and just return 'null' in this case.
+          return null;
+        }
+      }
+
+      async function onload(canvas, doomSharewareWadEncoded, freedoom1WadEncoded, freedoom2WadEncoded) {
+
+        // Start Doom using shareware Doom WAD
+        let currentlyLoadedGame = startDoomGame(canvas, decodeAsBase64(doomSharewareWadEncoded));
+
+        // add Drag-n-Drop support for restarting Doom game with a user-provided WAD
+        freedoom1Wad = null;
+        freedoom2Wad = null;
+
+        canvas.addEventListener("drop", (event) => {
+		      event.preventDefault();
+
+				  var files = event.dataTransfer?.files; // Array of all files being dropped
+
+          // Assume that even if multiple files are being dropped that we only care about the first one.
+          files[0].arrayBuffer().then((arrayBuffer) => {
+
+            // Cancel the previously loaded game
+            currentlyLoadedGame.then((abortController) => { abortController.abort(); });
+
+            let iWadNeeded = determineIWadNeeded(arrayBuffer);
+
+            let iWad = null;
+            let pWad = null;
+
+            if (iWadNeeded === IWadNeeded.Doom1) {
+              // If freedoom1 WAD has yet to be decoded, do that now and cache the result
+              if (freedoom1Wad === null) {
+                freedoom1Wad = decodeAsBase64(freedoom1WadEncoded);
+              }
+              iWad = freedoom1Wad;
+              pWad = new Uint8Array(arrayBuffer);
+            } else if (iWadNeeded === IWadNeeded.Doom2) {
+              // If freedoom2 WAD has yet to be decoded, do that now and cache the result
+              if (freedoom2Wad === null) {
+                freedoom2Wad = decodeAsBase64(freedoom2WadEncoded);
+              }
+              iWad = freedoom2Wad;
+              pWad = new Uint8Array(arrayBuffer);
+            } else if (iWadNeeded === IWadNeeded.SelfIsIWad) {
+              iWad = arrayBuffer;
+              pWad = null;
+            }
+
+            currentlyLoadedGame = startDoomGame(canvas, iWad, pWad);
+          });
+        });
+
+        canvas.addEventListener("dragover", (event) => {
+          // prevent default behavior in order to allow custom drop
+          event.preventDefault();
+        });
+      }
+    </script>
+    <template class="textAsset" data-assetname="doom.wasm.base64">
+      <div>{% include doom/doom.wasm.base64 %}</div>
+    </template>
+    <template class="textAsset" data-assetname="DOOM1.WAD.base64">
+      <!--
+        Here lies version 1.9 of the shareware Doom WAD file, in its entirety, encoded via Base64.
+        Here's one other place where this file is freely available: https://distro.ibiblio.org/slitaz/sources/packages/d/doom1.wad
+
+        It is believed that this file is freely distributable, supporting details are here: https://github.com/ChrisJan00/WarrensDream/blob/337acd9d5c277e029c0ced7737fe5d7168553944/doom-wad-shareware-license.txt#L122
+      -->
+      <div>{% include doom/DOOM1.WAD.base64 %}</div>
+    </template>
+    <template class="textAsset" data-assetname="freedoom1.wad.base64">
+      <!--
+        Here lies the Freedoom Phase 1 WAD file, in its entirety, encoded via Base64.
+        Here's one other place where this file is freely available: https://freedoom.github.io/download.html
+
+        This file is distrubted via this licence, available here: https://github.com/freedoom/freedoom/blob/master/COPYING.adoc
+
+          Copyright © 2001-2024 Contributors to the Freedoom project. All rights reserved.
+
+          Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+            - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+            - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+            - Neither the name of the Freedoom project nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+          THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+          For a list of contributors to the Freedoom project, see the file CREDITS.
+      -->
+      <div>{% include doom/freedoom1.wad.base64 %}</div>
+    </template>
+    <template class="textAsset" data-assetname="freedoom2.wad.base64">
+      <!--
+        Here lies the Freedoom Phase 2 WAD file, in its entirety, encoded via Base64.
+        Here's one other place where this file is freely available: https://freedoom.github.io/download.html
+ 
+        This file is distrubted via this licence, available here: https://github.com/freedoom/freedoom/blob/master/COPYING.adoc
+
+          Copyright © 2001-2024 Contributors to the Freedoom project. All rights reserved.
+
+          Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+            - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+            - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+            - Neither the name of the Freedoom project nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+          THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+          For a list of contributors to the Freedoom project, see the file CREDITS.
+      -->
+      <div>{% include doom/freedoom2.wad.base64 %}</div>
+    </template>
+  </head>
+  <body>
+    <canvas id="DoomGame" tabindex="0"></canvas>
+    <script type="text/javascript">
+      addEventListener("load", (event) => {
+        let canvas = document.getElementById("DoomGame");
+
+        onload(canvas, retrieveTextAsset("DOOM1.WAD.base64"), retrieveTextAsset("freedoom1.wad.base64"), retrieveTextAsset("freedoom2.wad.base64"));
+      });
+    </script>
+  </body>
+</html>

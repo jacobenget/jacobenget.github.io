@@ -1,6 +1,6 @@
 # This Makefile is nothing more than a shortcuts/macros for useful commands.
 # So all targets are 'PHONY', as none of the targets are the name of a file on disk.
-.PHONY: dev-server-create-docker-image dev-server-start draft-doom_wad_parser draft-tic_tac_toe publish-all-scala-js-files prepare-to-commit
+.PHONY: dev-server-create-docker-image dev-server-start draft-doom_wad_parser draft-tic_tac_toe publish-all-scala-js-files prepare-to-commit encode-doom-binary-resources
 
 # Create the docker image that'll be used by dev-server-start
 dev-server-create-docker-image:
@@ -25,7 +25,18 @@ publish-all-scala-js-files:
 	cd doom_wad_parser && sbt fullLinkJSAndCopy
 	cd tic_tac_toe && sbt fullLinkJSAndCopy
 
+DOOM_BINARY_RESOURCES_FOLDER = docs/_includes/doom
+DOOM_BINARY_RESOURCES = $(addprefix $(DOOM_BINARY_RESOURCES_FOLDER)/, doom.wasm DOOM1.WAD freedoom1.wad freedoom2.wad)
+DOOM_BINARY_RESOURCES_AS_BASE64 = $(addsuffix .base64, $(DOOM_BINARY_RESOURCES))
+
+# Produce any and all "X.base64" resources by encoding the "X" resource via base64
+%.base64: %
+	@echo [Encoding $< via Base64]
+	openssl base64 -in $< -out $@
+
+encode-doom-binary-resources: $(DOOM_BINARY_RESOURCES_AS_BASE64)
+
 # TODO: leverage Github actions so all generated files can be built from source as needed by Github.
 # Once that's true then there'll be no need for this make target, which does extra work to 'prepare' this
 # repository so that all generated files that are in source control are properly updated.
-prepare-to-commit: publish-scala-js-files
+prepare-to-commit: publish-scala-js-files encode-doom-binary-resources
