@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Doom in Just One File</title>
     <style>
       canvas#DoomGame {
           opacity: 70%;
@@ -47,7 +48,7 @@
           // The WAD is a PWAD ("Patch WAD"), and so needs to be run along with an IWAD
 
           // It's very likely (maybe a guarantee?) that if the PWAD is going to do anything useful than it must contain data associated with a specific Doom level.
-          // Such level-specific information is contained in a set of lumps that are preceeded by a marker/label lump specific to that level.
+          // Such level-specific information is contained in a set of lumps that are preceded by a marker/label lump specific to that level.
           // In Doom 1 such a level marker lump is named "ExMy", where 'x' is the episode number (1-3) and 'y' is the  mission number (1-9).
           // In Doom 2 such a level marker lump is named "MAPxx", where 'xx' is the level number (01-32).
           //
@@ -149,37 +150,26 @@
       // Returns a Promise that resolves to a AbortController
       async function startDoomGame(canvas, iWadAsUint8Array, optionalPWadAsUint8Array = null) {
 
-        //let { WASI, File, OpenFile, ConsoleStdout, PreopenDirectory } = await import("https://esm.sh/@bjorn3/browser_wasi_shim@0.2.20");
-
         let pWadProvided = (optionalPWadAsUint8Array !== null);
-
-        /*
-        let args = [];//["bin", "arg1", "arg2"];
-        let env = [];//["FOO=bar"];
-        let fds = [
-            new OpenFile(new File([])), // stdin
-            ConsoleStdout.lineBuffered(msg => console.log(`******[WASI stdout] ${msg}`)), // stdout
-            ConsoleStdout.lineBuffered(msg => console.warn(`******[WASI stderr] ${msg}`)), // stderr
-        ];
-        let wasi = new WASI(args, env, fds);
-        */
 
         let moduleInstance = null;
 
+        function saveGameLabel(gameSaveId) {
+          return `doomSaveGame_${gameSaveId}`;
+        }
 
-        function print_args_and_continue(func, functionName) {
-          return function(){
-            let result = func.apply(this, arguments);
-            console.log("Just called       " + functionName + "(", ...arguments, ") => ", result);
-          };
+        function getSaveGameString(gameSaveId) {
+          return localStorage.getItem(saveGameLabel(gameSaveId));
+        }
+
+        function setSaveGameString(gameSaveId, saveGameString) {
+          localStorage.setItem(saveGameLabel(gameSaveId), saveGameString);
         }
 
         let imports = {
           "gameSaving": {
             "readSaveGame": /* size_t readSaveGame(int gameSaveId, unsigned char *dataDestination) */ (gameSaveId, dataDestination) => {
-              const saveGameLabel = `doomSaveGame_${gameSaveId}`;
-              const saveGameString = localStorage.getItem(saveGameLabel);
-
+              const saveGameString = getSaveGameString(gameSaveId);
               const saveGameBytes = decodeAsBase64(saveGameString);
 
               // Write the save game data to the given destination
@@ -191,8 +181,7 @@
               return saveGameBytes.byteLength;
             },
             "sizeOfSaveGame": /* size_t sizeOfSaveGame(int gameSaveId) */ (gameSaveId) => { 
-              const saveGameLabel = `doomSaveGame_${gameSaveId}`;
-              const saveGameString = localStorage.getItem(saveGameLabel);
+              const saveGameString = getSaveGameString(gameSaveId);
               if (saveGameString) {
                 const byteCount = numberOfBytesEncodedAsBase64(saveGameString); // may return `null`
                 return byteCount ? byteCount : 0; // in the case of `null` just return 0 to denote "no valid save game exists with this id"
@@ -202,12 +191,9 @@
             },
             "writeSaveGame": /* size_t writeSaveGame(int gameSaveId, unsigned char *data, size_t length) */ (gameSaveId, dataSource, dataLength) => {
               const saveGameBytes = new Uint8Array(moduleInstance.exports.memory.buffer, dataSource, dataLength)
-
               const saveGameString = encodeAsBase64(saveGameBytes);
 
-              const saveGameLabel = `doomSaveGame_${gameSaveId}`;
-              localStorage.setItem(saveGameLabel, saveGameString);
-
+              setSaveGameString(gameSaveId, saveGameString);
               return dataLength;
             },
           },
@@ -261,11 +247,6 @@
               ctx.clearRect(0, 0, canvas.width, canvas.height);
               let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-              /*
-              const x = performance.now() % 1000;
-              const minColor = 1 - Math.abs((x / 500) - 1);
-              */
-
               for (var i = 0; i < (imageData.data.length / 4); i++) {
                 // Canvas pixels have their 8-bit components ordered "RBGA"
                 //
@@ -277,10 +258,16 @@
                 imageData.data[4*i+3] = 255;  // Alpha (fully opaque)
               }
               ctx.putImageData(imageData, 0, 0);
-              //console.log(` Rendered at ${performance.now()}`);
             },
             "setWindowTitle": /* void setWindowTitle(const char *title) -> () */ (title) => {
-              // do nothing!
+              const buffer8 = new Uint8Array(moduleInstance.exports.memory.buffer);
+              // find the first null byte, in order to determine the length of the window title
+              let titleLength = 0;
+              while (buffer8[title + titleLength] !== 0) {
+                titleLength++;
+              }
+              const titleString = new TextDecoder("utf-8").decode(buffer8.subarray(title, title + titleLength));
+              document.title = titleString;
             },
           },
           "wasi_snapshot_preview1": {
@@ -365,15 +352,10 @@
           },
         }
 
-        alert("Works??!!");
+        let doomWasmBinary = decodeAsBase64(retrieveTextAsset("doom.wasm.base64"));
 
-        return fetch("/assets/files/doom.wasm")
-          .then((response) => response.arrayBuffer())
-          .then((bytes) => WebAssembly.compile(bytes))
+        return WebAssembly.compile(doomWasmBinary)
           .then((module) => WebAssembly.instantiate(module, imports).then((instance) => {
-
-            // Create an AbortController that allows the user to 'abort' this Doom game
-            let controller = new AbortController();
 
             moduleInstance = instance;
 
@@ -385,6 +367,9 @@
 
             // sign up to call TickDoomGame twice every frame (one frame happens every 35 ms), for good measure
             let tickIntervalID = setInterval(instance.exports.tickGame, (1000 / 35) / 2);
+
+            // Create an AbortController that allows the user to 'abort' this Doom game (which is what'll happen if the user drops a new WAD)
+            let controller = new AbortController();
 
             controller.signal.addEventListener('abort', function(event) {
               clearInterval(tickIntervalID);
