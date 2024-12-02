@@ -1,7 +1,7 @@
 ---
 title: stick-figure half-demon samurai
 description: a 2D flash side-scrolling game
-project_id: samurai
+slug: samurai
 layout: project
 associated_top_level_page: projects
 ---

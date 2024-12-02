@@ -1,7 +1,7 @@
 ---
 title: 3D maze creator
 description: software to design + explore a 3D maze
-project_id: 3DMaze
+slug: 3DMaze
 layout: project
 associated_top_level_page: projects
 ---

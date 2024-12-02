@@ -1,7 +1,7 @@
 ---
 title: tic-tac-toe
 description: a classic game of simple strategy
-project_id: ticTacToe
+slug: ticTacToe
 layout: project
 associated_top_level_page: projects
 ---

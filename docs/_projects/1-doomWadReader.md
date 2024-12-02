@@ -1,7 +1,7 @@
 ---
 title: doom asset viewer
 description: online doom WAD reader
-project_id: doomWadReader
+slug: doomWadReader
 layout: project
 associated_top_level_page: projects
 ---

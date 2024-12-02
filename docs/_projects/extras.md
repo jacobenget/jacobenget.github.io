@@ -1,7 +1,7 @@
 ---
 title: extras
 description: small projects of interest
-project_id: extras
+slug: extras
 layout: project
 associated_top_level_page: projects
 ---
