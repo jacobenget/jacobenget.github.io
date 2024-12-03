@@ -63,7 +63,7 @@ I led canoe camping trips to the wilderness of [BWCA](https://www.fs.usda.gov/re
 
 My joy of programming also never left my side as I participated in [The Recurse Center](https://www.recurse.com/) (a programmer's retreat), 
 became a student of the Rust programming language, 
-and explored the WebAssembly ecosystem: porting [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game)) to WASM to run the game in the browser and building a parser of the WASM binary format.
+and explored the WebAssembly ecosystem: [attempting to create the canonical _Doom_ WebAssembly module](/projects/doomwasm) and building a parser of the WASM binary format.
 
 This sabbatical, this selfish gift of time, allowed for investment in myself, my family, and the community around me.
 
