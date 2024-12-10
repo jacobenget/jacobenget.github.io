@@ -26,7 +26,7 @@ You can find the latest release of `doom.wasm` [here](https://github.com/jacoben
 
 Also, [here](https://github.com/jacobenget/doom.wasm/tree/master?tab=readme-ov-file#why) you'll find a comparison on how `doom.wasm` measures up in usability against many other existing "_Doom_ ported to WebAssembly" projects (summary: `doom.wasm` has around 75% less imports and exports than any of them).
 
-And here, via `doom.wasm`, you can play the first episode of _Doom_, compliments of the [_Doom_ Shareware WAD](https://doomwiki.org/wiki/DOOM1.WAD):
+And here, via `doom.wasm`, you can play the first episode of _Doom_, compliments of the [_Doom_ Shareware WAD](https://doomwiki.org/wiki/DOOM1.WAD) (game controls are the same keyboard controls present in vanilla _Doom_, detailed [here](https://doom.fandom.com/wiki/Controls#Default_controls)):
 
 <iframe
     width="640"
